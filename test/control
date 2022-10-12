@@ -1,0 +1,85 @@
+$title
+$symmetry c1
+$redundant    file=coord
+$user-defined bonds    file=coord
+$coord    file=coord
+$optimize
+ internal   on
+ redundant  on
+ cartesian  off
+ global     off
+ basis      off
+$atoms
+o  1,5,7,9                                                                     \
+   basis =o def2-TZVP                                                          \
+   jbas  =o def2-TZVP
+c  2,4,6,8                                                                     \
+   basis =c def2-TZVP                                                          \
+   jbas  =c def2-TZVP
+ni 3                                                                           \
+   basis =ni def2-TZVP                                                         \
+   jbas  =ni def2-TZVP
+$basis    file=basis
+$scfmo   file=mos
+$closed shells
+ a       1-42                                   ( 2 )
+$scfiterlimit       30
+$thize     0.10000000E-04
+$thime        5
+$scfdamp   start=1.000  step=0.050  min=0.100
+$scfdump
+$scfintunit
+ unit=30       size=0        file=twoint
+$scfdiis
+$scforbitalshift  automatic=.1
+$drvopt
+   cartesian  on
+   basis      off
+   global     off
+   hessian    on
+   dipole     on
+   nuclear polarizability
+$interconversion  off
+   qconv=1.d-7
+   maxiter=25
+$coordinateupdate
+   dqmax=0.3
+   interpolate  on
+   statistics    5
+$forceupdate
+   ahlrichs numgeo=0  mingeo=3 maxgeo=4 modus=<g|dq> dynamic fail=0.3
+   threig=0.005  reseig=0.005  thrbig=3.0  scale=1.00  damping=0.0
+$forceinit on
+   diag=default
+$energy    file=energy
+$grad    file=gradient
+$forceapprox    file=forceapprox
+$dft
+   functional pbe0
+   gridsize   4
+$scfconv   8
+$ricore      500
+$rij
+$jbas    file=auxbasis
+$disp3 bj
+$scfinstab rpas
+$soes
+ a           20
+$rpacor      250   in_total
+#$maxcor    500 MiB  per_core
+$denconv 1d-7
+$rundimensions
+   natoms=9
+   nbf(CAO)=340
+   nbf(AO)=293
+$last step     ridft
+$orbital_max_rnorm 0.48240177317382E-06
+$last SCF energy change = -1961.1821
+$subenergy  Etot         E1                  Ej                Ex                 Ec                 En                 Disp
+-1961.182138208    -3908.331344573     1436.410232382    -86.25547975708    -3.180628243225     600.1836716990    -.8589715334206E-02
+$charge from ridft
+          0.000 (not to be modified here)
+$dipole from ridft
+  x     0.00050251790222    y    -0.00051899477588    z     0.00006627828232    a.u.
+   | dipole | =    0.0018439150  debye
+$end
