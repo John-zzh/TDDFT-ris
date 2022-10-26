@@ -27,7 +27,7 @@ count=${#element[@]}
 
 U=0.2
 
-if [ ! -d control_backup ];then
+if [ ! -f control_backup ];then
   cp control control_backup
   cp auxbasis auxbasis_backup
 fi
