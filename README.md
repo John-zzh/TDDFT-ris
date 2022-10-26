@@ -1,9 +1,8 @@
 # TDDFT-s
 A shell script plugin for Turbomole to invoke the TDDFT-s method. It works by revising the `auxbasis` and `control` file.
 ## request
-only use `gridsize 4` in the control file.
-
-Preload the Turbmole package to use Turbmole tools `adg` `kdg`, which will be used by the plugin.
+- Only use `gridsize 4` in the control file.
+- Preload the Turbmole package to use Turbmole tools `adg` `kdg`, which will be used by the plugin.
 
 ## usage
 In a finished `ridft` job directory where the control file sits, do 
