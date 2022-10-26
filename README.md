@@ -1,7 +1,8 @@
 # TDDFT-s
 A plugin for Turbomole input file to invoke the TDDFT-s method
 ## request
-only use `gridsize 4` in the control file
+only use `gridsize 4` in the control file.
+
 Preload the Turbmole package to use Turbmole tools `adg` `kdg`, which will be used by the plugin.
 
 ## usage
