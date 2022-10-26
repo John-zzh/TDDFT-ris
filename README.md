@@ -1,5 +1,5 @@
 # TDDFT-s
-A shell script plugin for Turbomole input file to invoke the TDDFT-s method. It works by changing revising `auxbasis` and `control` file.
+A shell script plugin for Turbomole to invoke the TDDFT-s method. It works by changing revising `auxbasis` and `control` file.
 ## request
 only use `gridsize 4` in the control file.
 
