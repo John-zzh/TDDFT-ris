@@ -27,7 +27,7 @@ count=${#element[@]}
 
 U=0.2
 
-if [ ! -f control_backup ];then
+if [ ! -d control_backup ];then
   cp control control_backup
   cp auxbasis auxbasis_backup
 fi
@@ -68,6 +68,8 @@ do
           adg rik
           adg escfnoxc
           adg profile
+        #   adg rik "\n highram"
+        #   adg dft "\n gridsize 0  \n gridtype 0 \n radsize 0"
         ;;
       "h") # Display help.
           usage
