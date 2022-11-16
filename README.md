@@ -1,5 +1,5 @@
-# TDDFT-s
-A shell script plugin for Turbomole to invoke the TDDFT-s method. It works by revising the `auxbasis` and `control` file.
+# TDDFT-ris
+A shell script plugin for Turbomole to invoke the TDDFT-ris method. It works by revising the `auxbasis` and `control` file.
 ## request
 - Only use `gridsize 4` in the control file.
 - Preload the Turbmole package to use Turbmole tools `adg` `kdg`, which will be used by the plugin.
@@ -10,7 +10,7 @@ In a finished `ridft` job directory where the control file sits, do
 $sh tddft-s.sh -a s -b def2-TZVP -c 
 ```
 ### keywords
-- **-a** method, `s` or `sp` (TDDFT-s or TDDFT-sp). `s`: one s type fitting function for each atom; `p`: one s type fitting function for each atom, and an extra p type fitting function for each non H atom.
+- **-a** method, `s` or `sp` (TDDFT-ris or TDDFT-risp). `s`: one s type fitting function for each atom; `p`: one s type fitting function for each atom, and an extra p type fitting function for each non H atom.
 - **-b** basis, like `def2-TZVP` or `def2-SVP`, same as the basis set you use for the normal calculaiton.
 - **-c** revise the control file to invoke the TDDFT-s method
 - **-u** The U parameter in U/R^2, U=0.2 by default. 
