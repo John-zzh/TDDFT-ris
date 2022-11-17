@@ -27,11 +27,13 @@ count=${#element[@]}
 
 U=0.2
 
-if [ ! -d control_backup ];then
+if [ ! -f control_backup ];then
   cp control control_backup
-  cp auxbasis auxbasis_backup
 fi
 
+if [ ! -f auxbasis_backup ];then
+ cp auxbasis auxbasis_backup
+fi
 
 usage() {
     echo "Usage:"
@@ -43,6 +45,22 @@ usage() {
     echo "-r: recover the normal RI-TDDFT setting"
     exit -1
 }
+
+
+
+add_sub_data(){
+    echo $1
+    echo $2
+  # $1 = gridsize, keyword
+  # $2 = gridsize 1, new keyword
+
+  if [[ "$(grep $1 control)" != "" ]];then # already has "gridsize"
+      sed -i "s/^.*$1.*$/ $2/" control
+  else
+      sed -i "/functional/a\ $2" control
+  fi
+}
+
 
 while getopts "hra:b:u:c" optname
 do
@@ -65,11 +83,22 @@ do
           adg cbas file=auxbasis
           kdg jbas
           adg rij
-          adg rik
+          adg rik "\n highram"
           adg escfnoxc
           adg profile
-        #   adg rik "\n highram"
-        #   adg dft "\n gridsize 0  \n gridtype 0 \n radsize 0"
+          add_sub_data 'gridsize' 'gridsize 1'
+          add_sub_data 'gridtype' 'gridtype 0'
+          add_sub_data 'radsize' 'radsize 1'
+
+
+          #   adg dft "\n gridsize 1  \n gridtype 0 \n radsize 1"
+          # if [[ "$(grep gridsize control)" != "" ]] # already has "gridsize"
+          # then
+          #     sed -i "s/^.*gridsize.*$/ gridsize 1/" control
+          # else
+          #     sed -i '/functional/a\gridsize 1' control
+          # fi
+
         ;;
       "h") # Display help.
           usage
