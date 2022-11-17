@@ -1,5 +1,5 @@
 # TDDFT-ris
-A shell script plugin for Turbomole to invoke the TDDFT-ris method. It works by revising the `auxbasis` and `control` file.
+A shell script plugin for Turbomole to invoke the TDDFT-ris method. It creates a backup for `auxbasis` and `control` file before revises them.
 ## request
 - Preload the Turbmole package to use Turbmole tools `adg` `kdg`, which will be used by the this shell script.
 
@@ -13,3 +13,5 @@ $sh tddft-s.sh -a s -b def2-TZVP -c
 - **-b** basis, like `def2-TZVP` or `def2-SVP`, same as the basis set you use for the normal calculaiton.
 - **-c** revise the control file to invoke the TDDFT-s method
 - **-u** The U parameter in U/R^2, U=0.2 by default. 
+- **-r** restore the `auxbasis` and `control` file from backup
+- **-h** help
