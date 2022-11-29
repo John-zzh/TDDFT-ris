@@ -1,5 +1,6 @@
 # Auto-ris: a plugin for Turbomole to invoke the TDDFT-ris method. 
-This shell script help to invoke the TDDFT-ris method for Turbomole >= 7.7
+This shell script help to invoke the TDDFT-ris method for Turbomole >= 7.7.
+
 It creates a backup for `auxbasis` and `control` file before revises them.
 ## request
 - Preload the Turbmole package to use Turbmole tools `adg` `kdg`, which will be used by the this shell script.
