@@ -1,4 +1,4 @@
-# Auto-ris: a plugin for the TDDFT-ris method in TURBOMOLE. 
+# Auto-ris: a plugin for the TDDFT-ris and TDDFT-ris+p method in TURBOMOLE. 
 This shell script automates invoking the TDDFT-ris method for Turbomole >= 7.7.
 
 It creates a backup for `auxbasis` and `control` file before revises them.
