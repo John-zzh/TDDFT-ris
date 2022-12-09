@@ -1,5 +1,5 @@
 # escfrisprep: a plugin for the TDDFT-ris and TDDFT-ris+p method in TURBOMOLE. 
-This shell script automates invoking the TDDFT-ris method for Turbomole >= 7.7.
+This automative shell script invokes the TDDFT-ris method for Turbomole >= 7.7.
 
 The script inplace revises the `auxbasis` and `control` file, after creating a backup for them.
 ## prequest
