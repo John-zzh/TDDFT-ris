@@ -1,5 +1,7 @@
 #!/bin/bash
 
+
+#103 elements
 element=(h he li be b c n o f ne na mg al si p s cl ar k ca sc ti v cr mn fe co
 ni cu zn ga ge as se br kr rb sr y zr nb mo tc ru rh pd ag cd in sn sb te i xe
 cs ba la ce pr nd pm sm eu gd tb dy ho er tm yb lu hf ta w re os ir pt au hg tl
@@ -15,34 +17,33 @@ radii=(0.5292 0.3113 1.6283 1.0855 0.8141 0.6513 0.5428 0.4652 0.4071 0.3618
 0.5443 0.5244 0.506 1.867 1.6523 1.4818 1.3431 1.2283 1.1315 4.4479 3.4332
 3.2615 3.1061 2.2756 1.9767 1.7473 1.4496 1.2915 1.296 1.1247 1.0465 0.9785
 0.9188 0.8659 0.8188 0.8086)
-
 count=${#element[@]}
-#103 elements
 
-# -a s or sp
-# -b basis name
-# -u 0.2 by default
-# -c modify the control control file
+declare -A radii_dict
+for No in `seq 1 $count`
+do
+    radii_dict[${element[$No-1]}]=${radii[$No-1]}
+done
+
 
 
 U=0.2
+basis=$(grep -m 1 "basis =" control | awk '{print $3}')
+echo 'basis in the control file' $basis
 
-if [ ! -f control_backup ];then
-  cp control control_backup
-fi
+#print the firt field of the line above "*basis =*" line
+included_elements=($(awk '/basis =/{print a;}{a=$1}' control))
 
-if [ ! -f auxbasis_backup ];then
- cp auxbasis auxbasis_backup
-fi
+echo "included eleemnts:" ${included_elements[*]}
 
 usage() {
     echo "Usage:"
     echo "sh tddft-s.sh [-a METHOD] [-b BASIS] [-c] [-r] "
     echo "Description:"
-    echo "METHOD: s or sp"
-    echo "BASIS: basis set"
-    echo "-c: modify the control file"
-    echo "-r: recover the normal RI-TDDFT setting"
+    echo "METHOD: s or s+p"
+    echo "BASIS: asign asign the basis set if different from the one in control file"
+    echo "-c: modify the control file to invoke TDDFT-ris(+p) method"
+    echo "-r: recover the normal TDDFT setting (control file and auxbasis file)"
     exit -1
 }
 
@@ -66,11 +67,11 @@ while getopts "hra:b:u:c" optname
 do
     case "$optname" in
       "a")
-        echo "invoking TDDFT-$OPTARG"
+        echo "invoking TDDFT-ri$OPTARG"
         s_sp=$OPTARG
         ;;
       "b")
-        echo "for basis set $OPTARG"
+        echo "manually set basis set: $OPTARG"
         basis=$OPTARG
         ;;
       "u")
@@ -78,7 +79,17 @@ do
         U=$OPTARG
         ;;
       "c")
+            if [ ! -f control_backup ];then
+                echo "create control_backup "
+                cp control control_backup
+            fi
+
+            if [ ! -f auxbasis_backup ];then
+                echo "create auxbasis_backup "
+                cp auxbasis auxbasis_backup
+            fi
           echo "modify the control file, turn on RIJK and turn off xckernel"
+
           # need to preload turbomole
           adg cbas file=auxbasis
           kdg jbas
@@ -89,15 +100,6 @@ do
           add_sub_data 'gridsize' 'gridsize 1'
           add_sub_data 'gridtype' 'gridtype 0'
           add_sub_data 'radsize' 'radsize 1'
-
-
-          #   adg dft "\n gridsize 1  \n gridtype 0 \n radsize 1"
-          # if [[ "$(grep gridsize control)" != "" ]] # already has "gridsize"
-          # then
-          #     sed -i "s/^.*gridsize.*$/ gridsize 1/" control
-          # else
-          #     sed -i '/functional/a\gridsize 1' control
-          # fi
 
         ;;
       "h") # Display help.
@@ -123,19 +125,23 @@ if [ $s_sp ] && [ $basis ];then
   touch auxbasis
   echo \$cbas >> auxbasis
   # echo `seq 1 $count`
+  count=${#included_elements[@]}
+  echo "asigin exponent for $count elements"
   for No in `seq 1 $count`
   do
-    cur_element=${element[$No-1]}
-    cur_radius=${radii[$No-1]}
+    # echo $No
+    cur_element=${included_elements[$No-1]}
+    # echo $cur_element
+    cur_radius=${radii_dict[$cur_element]}
     echo \* >> auxbasis
     echo $cur_element $basis >> auxbasis
     echo \# $cur_element >> auxbasis
     echo \* >> auxbasis
     echo '  1 s' >> auxbasis
     # echo $U ${radii[$No-1]}
-    expo=$(echo $U $cur_radius | awk  '{printf "%.16f",$1/($2*1.8897259885789)^2}'  )
+    expo=$(echo $U $cur_radius | awk '{printf "%.11f",$1/($2*1.8897259885789)^2}')
     echo ' ' $expo 1.0 >> auxbasis
-    if [ "$s_sp" == 'sp' ] && [ "$cur_element" != 'h' ];then
+    if [ "$s_sp" == 's+p' ] && [ "$cur_element" != 'h' ];then
       echo '  1 p' >> auxbasis
       echo ' ' $expo 1.0 >> auxbasis
     fi
