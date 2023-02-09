@@ -1,3 +1,3 @@
 #!/bin/bash
 
-sh ../tddft-s.sh -a s -b def2-TZVP -c
+sh ../escfrisprep.sh -a s -c

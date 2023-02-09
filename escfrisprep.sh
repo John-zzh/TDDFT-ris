@@ -32,9 +32,19 @@ basis=$(grep -m 1 "basis =" control | awk '{print $3}')
 echo 'basis in the control file' $basis
 
 #print the firt field of the line above "*basis =*" line
-included_elements=($(awk '/basis =/{print a;}{a=$1}' control))
+# included_elements=($(awk '/basis =/{print a;}{a=$1}' control))
 
-echo "included eleemnts:" ${included_elements[*]}
+# while read line; do
+#     if [[ $line == "\$coord" ]]; then
+#         while read line; do
+#             if [[ ${line:0:1} == "$" ]]; then
+#                 break
+#             fi
+#             echo $(echo $line | awk '{print $4}')
+#         done
+#     fi
+# done < test.txt | sort | uniq
+
 
 usage() {
     echo "Usage:"
@@ -50,7 +60,7 @@ usage() {
 
 
 add_sub_data(){
-    echo $1
+    # echo $1
     echo $2
   # $1 = gridsize, keyword
   # $2 = gridsize 1, new keyword
@@ -94,7 +104,8 @@ do
           adg cbas file=auxbasis
           kdg jbas
           adg rij
-          adg rik "\n highram"
+          adg rik
+        #   adg rik "\n highram"
           adg escfnoxc
           adg profile
           add_sub_data 'gridsize' 'gridsize 1'
@@ -125,6 +136,11 @@ if [ $s_sp ] && [ $basis ];then
   touch auxbasis
   echo \$cbas >> auxbasis
   # echo `seq 1 $count`
+  included_elements=($(t2x -c | awk 'NR>=3{print tolower($1)}' | sort | uniq))
+
+
+  echo "included eleemnts:" ${included_elements[*]}
+
   count=${#included_elements[@]}
   echo "asigin exponent for $count elements"
   for No in `seq 1 $count`
