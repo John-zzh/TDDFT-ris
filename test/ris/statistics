@@ -1,0 +1,215 @@
+
+ DSCF STATISTICS OUTPUT :
+
+ integral neglect threshold       :  0.71E-11
+ integral storage threshold THIZE :  0.10E-04
+ integral storage threshold THIME :         5
+
+ cpu-time for construction of rho     :        3.814 s
+
+
+
+ --------------------    1.ITERATION  --------------------
+  cpu-time for ri-coulomb part        :        0.098 s
+ wall-time for ri-coulomb part        :        0.098 s
+
+  cpu-time for rik-exchange part      :        0.916 s
+ wall-time for rik-exchange part      :        0.922 s
+
+ eigenvalue        1 after current iteration:   0.15099143D+00
+ eigenvalue        2 after current iteration:   0.15099152D+00
+ eigenvalue        3 after current iteration:   0.15139298D+00
+ eigenvalue        4 after current iteration:   0.15139440D+00
+ eigenvalue        5 after current iteration:   0.17609127D+00
+ eigenvalue        6 after current iteration:   0.17609344D+00
+ eigenvalue        7 after current iteration:   0.20910635D+00
+ eigenvalue        8 after current iteration:   0.21071299D+00
+ eigenvalue        9 after current iteration:   0.21072420D+00
+ eigenvalue       10 after current iteration:   0.21591036D+00
+ eigenvalue       11 after current iteration:   0.21591106D+00
+ eigenvalue       12 after current iteration:   0.21830299D+00
+ eigenvalue       13 after current iteration:   0.21923153D+00
+ eigenvalue       14 after current iteration:   0.21988616D+00
+ eigenvalue       15 after current iteration:   0.22149246D+00
+ eigenvalue       16 after current iteration:   0.22270166D+00
+ eigenvalue       17 after current iteration:   0.22270299D+00
+ eigenvalue       18 after current iteration:   0.22423484D+00
+ eigenvalue       19 after current iteration:   0.22423970D+00
+ eigenvalue       20 after current iteration:   0.22503405D+00
+
+
+ --------------------    2.ITERATION  --------------------
+  cpu-time for ri-coulomb part        :        0.110 s
+ wall-time for ri-coulomb part        :        0.110 s
+
+  cpu-time for rik-exchange part      :        0.660 s
+ wall-time for rik-exchange part      :        0.666 s
+
+ eigenvalue        1 after current iteration:   0.15002197D+00
+ eigenvalue        2 after current iteration:   0.15002213D+00
+ eigenvalue        3 after current iteration:   0.15019404D+00
+ eigenvalue        4 after current iteration:   0.15019478D+00
+ eigenvalue        5 after current iteration:   0.17505046D+00
+ eigenvalue        6 after current iteration:   0.17505264D+00
+ eigenvalue        7 after current iteration:   0.20845801D+00
+ eigenvalue        8 after current iteration:   0.21013698D+00
+ eigenvalue        9 after current iteration:   0.21014719D+00
+ eigenvalue       10 after current iteration:   0.21136037D+00
+ eigenvalue       11 after current iteration:   0.21136067D+00
+ eigenvalue       12 after current iteration:   0.21694313D+00
+ eigenvalue       13 after current iteration:   0.21807989D+00
+ eigenvalue       14 after current iteration:   0.21872782D+00
+ eigenvalue       15 after current iteration:   0.22011605D+00
+ eigenvalue       16 after current iteration:   0.22011670D+00
+ eigenvalue       17 after current iteration:   0.22033314D+00
+ eigenvalue       18 after current iteration:   0.22033376D+00
+ eigenvalue       19 after current iteration:   0.22055004D+00
+ eigenvalue       20 after current iteration:   0.22415719D+00
+
+
+ --------------------    3.ITERATION  --------------------
+  cpu-time for ri-coulomb part        :        0.073 s
+ wall-time for ri-coulomb part        :        0.073 s
+
+  cpu-time for rik-exchange part      :        0.665 s
+ wall-time for rik-exchange part      :        0.671 s
+
+ eigenvalue        1 after current iteration:   0.14993738D+00
+ eigenvalue        2 after current iteration:   0.14993745D+00
+ eigenvalue        3 after current iteration:   0.15017585D+00
+ eigenvalue        4 after current iteration:   0.15017659D+00
+ eigenvalue        5 after current iteration:   0.17492173D+00
+ eigenvalue        6 after current iteration:   0.17492395D+00
+ eigenvalue        7 after current iteration:   0.20845366D+00
+ eigenvalue        8 after current iteration:   0.21012636D+00
+ eigenvalue        9 after current iteration:   0.21013636D+00
+ eigenvalue       10 after current iteration:   0.21113500D+00
+ eigenvalue       11 after current iteration:   0.21113531D+00
+ eigenvalue       12 after current iteration:   0.21690300D+00
+ eigenvalue       13 after current iteration:   0.21800674D+00
+ eigenvalue       14 after current iteration:   0.21869416D+00
+ eigenvalue       15 after current iteration:   0.21955017D+00
+ eigenvalue       16 after current iteration:   0.21955041D+00
+ eigenvalue       17 after current iteration:   0.21983041D+00
+ eigenvalue       18 after current iteration:   0.21983106D+00
+ eigenvalue       19 after current iteration:   0.22052648D+00
+ eigenvalue       20 after current iteration:   0.22414389D+00
+
+
+ --------------------    4.ITERATION  --------------------
+  cpu-time for ri-coulomb part        :        0.089 s
+ wall-time for ri-coulomb part        :        0.089 s
+
+  cpu-time for rik-exchange part      :        0.657 s
+ wall-time for rik-exchange part      :        0.664 s
+
+ eigenvalue        1 after current iteration:   0.14993694D+00
+ eigenvalue        2 after current iteration:   0.14993701D+00
+ eigenvalue        3 after current iteration:   0.15017573D+00
+ eigenvalue        4 after current iteration:   0.15017647D+00
+ eigenvalue        5 after current iteration:   0.17492025D+00
+ eigenvalue        6 after current iteration:   0.17492248D+00
+ eigenvalue        7 after current iteration:   0.20845362D+00
+ eigenvalue        8 after current iteration:   0.21012585D+00
+ eigenvalue        9 after current iteration:   0.21013584D+00
+ eigenvalue       10 after current iteration:   0.21112761D+00
+ eigenvalue       11 after current iteration:   0.21112791D+00
+ eigenvalue       12 after current iteration:   0.21690273D+00
+ eigenvalue       13 after current iteration:   0.21800445D+00
+ eigenvalue       14 after current iteration:   0.21869332D+00
+ eigenvalue       15 after current iteration:   0.21949997D+00
+ eigenvalue       16 after current iteration:   0.21950022D+00
+ eigenvalue       17 after current iteration:   0.21981906D+00
+ eigenvalue       18 after current iteration:   0.21981969D+00
+ eigenvalue       19 after current iteration:   0.22052621D+00
+ eigenvalue       20 after current iteration:   0.22414377D+00
+
+
+ --------------------    5.ITERATION  --------------------
+  cpu-time for ri-coulomb part        :        0.105 s
+ wall-time for ri-coulomb part        :        0.105 s
+
+  cpu-time for rik-exchange part      :        0.657 s
+ wall-time for rik-exchange part      :        0.663 s
+
+ eigenvalue        1 after current iteration:   0.14993693D+00
+ eigenvalue        2 after current iteration:   0.14993701D+00
+ eigenvalue        3 after current iteration:   0.15017573D+00
+ eigenvalue        4 after current iteration:   0.15017647D+00
+ eigenvalue        5 after current iteration:   0.17492024D+00
+ eigenvalue        6 after current iteration:   0.17492247D+00
+ eigenvalue        7 after current iteration:   0.20845362D+00
+ eigenvalue        8 after current iteration:   0.21012581D+00
+ eigenvalue        9 after current iteration:   0.21013579D+00
+ eigenvalue       10 after current iteration:   0.21112705D+00
+ eigenvalue       11 after current iteration:   0.21112736D+00
+ eigenvalue       12 after current iteration:   0.21690273D+00
+ eigenvalue       13 after current iteration:   0.21800442D+00
+ eigenvalue       14 after current iteration:   0.21869328D+00
+ eigenvalue       15 after current iteration:   0.21949626D+00
+ eigenvalue       16 after current iteration:   0.21949652D+00
+ eigenvalue       17 after current iteration:   0.21981777D+00
+ eigenvalue       18 after current iteration:   0.21981840D+00
+ eigenvalue       19 after current iteration:   0.22052621D+00
+ eigenvalue       20 after current iteration:   0.22414377D+00
+
+
+ --------------------    6.ITERATION  --------------------
+  cpu-time for ri-coulomb part        :        0.041 s
+ wall-time for ri-coulomb part        :        0.041 s
+
+  cpu-time for rik-exchange part      :        0.356 s
+ wall-time for rik-exchange part      :        0.363 s
+
+ eigenvalue        1 after current iteration:   0.14993693D+00
+ eigenvalue        2 after current iteration:   0.14993701D+00
+ eigenvalue        3 after current iteration:   0.15017573D+00
+ eigenvalue        4 after current iteration:   0.15017647D+00
+ eigenvalue        5 after current iteration:   0.17492024D+00
+ eigenvalue        6 after current iteration:   0.17492247D+00
+ eigenvalue        7 after current iteration:   0.20845362D+00
+ eigenvalue        8 after current iteration:   0.21012580D+00
+ eigenvalue        9 after current iteration:   0.21013579D+00
+ eigenvalue       10 after current iteration:   0.21112701D+00
+ eigenvalue       11 after current iteration:   0.21112731D+00
+ eigenvalue       12 after current iteration:   0.21690273D+00
+ eigenvalue       13 after current iteration:   0.21800442D+00
+ eigenvalue       14 after current iteration:   0.21869328D+00
+ eigenvalue       15 after current iteration:   0.21949623D+00
+ eigenvalue       16 after current iteration:   0.21949649D+00
+ eigenvalue       17 after current iteration:   0.21981768D+00
+ eigenvalue       18 after current iteration:   0.21981832D+00
+ eigenvalue       19 after current iteration:   0.22052621D+00
+ eigenvalue       20 after current iteration:   0.22414377D+00
+
+
+ --------------------    7.ITERATION  --------------------
+  cpu-time for ri-coulomb part        :        0.026 s
+ wall-time for ri-coulomb part        :        0.026 s
+
+  cpu-time for rik-exchange part      :        0.208 s
+ wall-time for rik-exchange part      :        0.215 s
+
+ eigenvalue        1 after current iteration:   0.14993693D+00
+ eigenvalue        2 after current iteration:   0.14993701D+00
+ eigenvalue        3 after current iteration:   0.15017573D+00
+ eigenvalue        4 after current iteration:   0.15017647D+00
+ eigenvalue        5 after current iteration:   0.17492024D+00
+ eigenvalue        6 after current iteration:   0.17492247D+00
+ eigenvalue        7 after current iteration:   0.20845362D+00
+ eigenvalue        8 after current iteration:   0.21012580D+00
+ eigenvalue        9 after current iteration:   0.21013579D+00
+ eigenvalue       10 after current iteration:   0.21112701D+00
+ eigenvalue       11 after current iteration:   0.21112731D+00
+ eigenvalue       12 after current iteration:   0.21690273D+00
+ eigenvalue       13 after current iteration:   0.21800442D+00
+ eigenvalue       14 after current iteration:   0.21869328D+00
+ eigenvalue       15 after current iteration:   0.21949623D+00
+ eigenvalue       16 after current iteration:   0.21949649D+00
+ eigenvalue       17 after current iteration:   0.21981768D+00
+ eigenvalue       18 after current iteration:   0.21981832D+00
+ eigenvalue       19 after current iteration:   0.22052621D+00
+ eigenvalue       20 after current iteration:   0.22414377D+00
+
+  escf  : cpu elapsed        13.469 s
+          wall               15.209 s
