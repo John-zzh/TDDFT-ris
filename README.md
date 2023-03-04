@@ -12,7 +12,7 @@ Note: a python implementation for TDDFT-ris (based on PySCF) is also available, 
 ## Usage
 In a finished `ridft` job directory where the `control` file exists, do
 ```
-$sh escfrisprep.sh -a s -c
+$sh escfrisprep.sh 
 ```
 ## Keywords
 - **-b** method, `s` or `s+p` (TDDFT-ris or TDDFT-ris+p). `s`: one s type fitting function for each atom; `s+p`: one s type fitting function for each atom, and an extra p type fitting function for each non-H atom; `N`: do not creat the minimal auxbasis
