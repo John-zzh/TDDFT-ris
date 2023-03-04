@@ -2,7 +2,8 @@
 
 module load turbomole
 
-rm -rf ris risp only_control only_basis no_fe
+rm -rf ris risp only_control only_basis no_fe ris_rocover
+
 
 
 mkdir ris
@@ -11,6 +12,16 @@ echo "TDDFT-ris"
 cp ../Fe_backup/* ./
 sh ../../escfrisprep.sh 
 sbatch escf.slurm
+cd ..
+echo '========================================'
+
+mkdir ris_rocover
+cd ris_rocover
+echo "TDDFT-ris_rocover"
+cp ../Fe_backup/* ./
+sh ../../escfrisprep.sh 
+sh ../../escfrisprep.sh -r
+# sbatch escf.slurm
 cd ..
 echo '========================================'
 
