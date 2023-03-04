@@ -6,10 +6,10 @@ usage() {
     echo "sh tddft-s.sh [-b s/s+p/N] [-x Fe/Ni] [-t VALUE] [-c Y/N] [-r] "
     echo "Description:"
     echo "-b: s -- one s type orbital per atom; p -- additional p orbital per non Hydrogen atom; N -- do not creat the minimal auxbasis"
-    echo "-x: s -- one s type orbital per atom; p -- additional p orbital per non Hydrogen atom; N -- do not creat the minimal auxbasis"
-    echo "-t: a list of elements that you dont want to use minimal fitting basis. They will use full RIJK fitting basis automatically"
+    echo "-x: A list of elements that you dont want to use minimal fitting basis. They will use full RIJK fitting basis automatically"
+    echo "-t: The global theta value in the orbital exponent alpha=theta/R^2. By default theta=0.2."
     echo "-c: Y -- modify the control file; N -- do not revise the control file"
-    echo "-r: recover the normal TDDFT setting (control file and auxbasis file)"
+    echo "-r: Recover the normal TDDFT setting (mainly control file and auxbasis file)"
     exit -1
 }
 
@@ -41,8 +41,10 @@ do
           exit 0
         ;;
       "r") # recover the normal setting
-            cp control_backup control
-            cp auxbasis_backup auxbasis
+            for backup_file in $(ls *_ris_backup)
+            do
+                original_file=${backup_file%_ris_backup}
+                cp backup_file original_file
             echo "recover contol and auxbasis from backup"
             exit 0
         ;;
@@ -151,7 +153,7 @@ if [ $s_sp == 's' ] || [ $s_sp == 's+p' ] ;then
     done
     
     
-    if [ ! -f auxbasis_backup ] && [ -f auxbasis ];then
+    if [ ! -f auxbasis_ris_backup ] && [ -f auxbasis ];then
         echo "create auxbasis_ris_backup "
         cp auxbasis auxbasis_ris_backup
     fi
