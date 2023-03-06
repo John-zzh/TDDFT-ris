@@ -1,5 +1,17 @@
 #!/bin/bash
 
+    echo
+    echo "             +--------------------------------------+"
+    echo "             |            escfrisprep               |"
+    echo "             |  prepare for TDDFT-ris calculations  |"
+    echo "             |           with TURBOMOLE             |"
+    echo "             +--------------------------------------+"
+    echo
+    echo "   Ref: Z. Zhou, F. Della Sala, S. M. Parker," 
+    echo "        J. Phys. Chem. Lett. 2023, 14, 7, 1968–1976"
+    echo
+    echo "            $(date)"
+    echo
 
 usage() {
     echo "Usage:"
@@ -9,15 +21,33 @@ usage() {
     echo "-x: A list of elements that you dont want to use minimal fitting basis. They will use full RIJK fitting basis automatically"
     echo "-t: The global theta value in the orbital exponent alpha=theta/R^2. By default theta=0.2."
     echo "-c: Y -- modify the control file; N -- do not revise the control file"
+    echo "-p: Y -- use pure density functional; N -- use hybrid or RSH functional. By default use hybrid. Option Y/N only matters using pure density functional and exclude some elements that will use default RIJ fitting basis"
     echo "-r: Recover the original setting from backup (mainly control file and auxbasis file)"
     exit -1
 }
 
+if [ -x "$TURBODIR/bin/${TARCHDIR}/sdg" ]; then
+    SHOWDG="$TURBODIR/bin/${TARCHDIR}/sdg"
+elif [ -x "`which sdg`" ]; then
+    SHOWDG="sdg"
+else
+    echo "no sdg tool found, please load Turbomole correctly"
+    exit 0
+fi
+
+CONTROL_FILE=$($SHOWDG -f atoms)
+if [ -z "${CONTROL_FILE}" ]; then
+    echo "no \$atoms data group found, please execute the escfrisprep in a Turbomole working directory"
+    exit 0
+fi
+
+
 s_sp='s'
 revise='Y'
 theta=0.2
+pure='N'
 
-while getopts "hrb:x:t:c" optname
+while getopts "hrb:x:t:c:p:" optname
 do
     case "$optname" in
       "b")
@@ -36,6 +66,9 @@ do
       "c")
         revise=$OPTARG
         ;;
+      "p")
+        pure=$OPTARG
+        ;;
       "h") # Display help.
           usage
           exit 0
@@ -44,8 +77,16 @@ do
             for backup_file in $(ls *_ris_backup)
             do
                 original_file=${backup_file%_ris_backup}
+                echo "restore $original_file from $backup_file"
                 mv $backup_file $original_file
             done
+            
+            use_ri=$($SHOWDG -f ri)
+            if [ -z "${use_ri}" ]; then
+                echo "The original calculation did not use RI, remove auxbasis"
+                rm auxbasis
+            fi
+            
             echo "recover the original setting from backup"
             exit 0
         ;;
@@ -58,17 +99,16 @@ do
 done
 
 
-if [ -x "$TURBODIR/bin/${TARCHDIR}/sdg" ]; then
-    SHOWDG="$TURBODIR/bin/${TARCHDIR}/sdg"
-elif [ -x "`which sdg`" ]; then
-    SHOWDG="sdg"
+if [ "$pure" == "Y" ] || [ "$pure" == "y" ];then
+    echo "dealing with pure functional, use RIJ basis if any excluded elements"
+    CBAS='jbas'
 else
-    echo "no sdg tool found, please load Turbomole correctly"
-    exit 0
+    echo "dealing with hybrid functional, use RIJK basis if any excluded elements"
+    CBAS='cbas'
 fi
     
     
-if [ "$revise" == 'Y' ] || [ "$revise" == 'y' ]; then
+if [ "$revise" == "Y" ] || [ "$revise" == "y" ]; then
     echo "modify the setting, turn on RIJK and turn off xckernel"
 
     if [ -x "$TURBODIR/bin/${TARCHDIR}/adg" ]; then
@@ -89,12 +129,7 @@ if [ "$revise" == 'Y' ] || [ "$revise" == 'y' ]; then
         exit 0
     fi
     
-    CONTROL_FILE=$($SHOWDG -f atoms)
-    
-    if [ -z "${CONTROL_FILE}" ]; then
-        echo "no \$atoms data group found, please execute the escfrisprep in a Turbomole working directory"
-        exit 0
-    fi
+
     
     echo "control file is $CONTROL_FILE"
     
@@ -106,15 +141,22 @@ if [ "$revise" == 'Y' ] || [ "$revise" == 'y' ]; then
     fi
 
     
-    $ADD_DG cbas file=auxbasis
-    $KILLDG jbas
-    sed -i -e '/jbas  =/d' $CONTROL_FILE
+    sed -i -e '/jkbas =/d' $CONTROL_FILE
+    if [ "$pure" == "N" ] || [ "$pure" == "n" ];then
+        $KILLDG jbas
+        sed -i -e '/jbas  =/d' $CONTROL_FILE
+        $ADD_DG rik
+    else
+        sed -i "s/cbas/jbas/g" $CONTROL_FILE
+    fi
+    
+    $ADD_DG "$CBAS" file=auxbasis
+    $KILLDG jkbas
     $ADD_DG rij
-    $ADD_DG rik
     $ADD_DG escfnoxc
     $ADD_DG profile
 else
-    echo "do not revise the $CONTROL_FILE file"
+    echo "you choose not to revise the $CONTROL_FILE file"
 fi
 
 
@@ -130,7 +172,7 @@ if [ $s_sp == 's' ] || [ $s_sp == 's+p' ] ;then
     
     echo "generate ris auxbasis file"
     #103 elements
-    element=(h he li be b c n o f ne na mg al si p s cl ar k ca sc ti v cr mn fe co
+    elements=(h he li be b c n o f ne na mg al si p s cl ar k ca sc ti v cr mn fe co
     ni cu zn ga ge as se br kr rb sr y zr nb mo tc ru rh pd ag cd in sn sb te i xe
     cs ba la ce pr nd pm sm eu gd tb dy ho er tm yb lu hf ta w re os ir pt au hg tl
     pb bi po at rn fr ra ac th pa u np pu am cm bk cf es fm md no lr)
@@ -145,12 +187,12 @@ if [ $s_sp == 's' ] || [ $s_sp == 's+p' ] ;then
     0.5443 0.5244 0.506 1.867 1.6523 1.4818 1.3431 1.2283 1.1315 4.4479 3.4332
     3.2615 3.1061 2.2756 1.9767 1.7473 1.4496 1.2915 1.296 1.1247 1.0465 0.9785
     0.9188 0.8659 0.8188 0.8086)
-    count=${#element[@]}
+    count=${#elements[@]}
     
     declare -A radii_dict
     for No in `seq 1 $count`
     do
-        radii_dict[${element[$No-1]}]=${radii[$No-1]}
+        radii_dict[${elements[$No-1]}]=${radii[$No-1]}
     done
     
     
@@ -161,17 +203,16 @@ if [ $s_sp == 's' ] || [ $s_sp == 's+p' ] ;then
     
     rm -f auxbasis
     touch auxbasis
-    echo \$cbas >> auxbasis
-    
+    echo \$"$CBAS" >> auxbasis
     
     
     while read line; do
-        # Extract the element symbol 
+        # Extract the element symbol from the first word of each line of basis file
         cur_element=$(echo "$line" | awk '{print $1}')
     
-        # Use grep to check if $cur_element is an element
-        if  echo "$cur_element" | grep -q "^[[:alpha:]]*$"; then
-            if [[ "${element[*]}" == *"$cur_element"* ]] &&  [[ "${excluded_elements[*]}" != *"$cur_element"* ]] ; then
+        # Use grep to check if $cur_element is pure letter and an element with turbulated radii
+        if  echo "$cur_element" | grep -q "^[[:alpha:]]*$"  && [[ "${elements[@]}" =~ "$cur_element" ]]; then
+            if [[ ! "$excluded_elements" =~ "$cur_element" ]]; then
                 echo "included element:" $cur_element
                 cur_radius=${radii_dict[$cur_element]}
                 echo \* >> auxbasis
@@ -185,13 +226,15 @@ if [ $s_sp == 's' ] || [ $s_sp == 's+p' ] ;then
                   echo '  1 p' >> auxbasis
                   echo ' ' $expo 1.0 >> auxbasis
                 fi
+            else
+                echo "$cur_element will use default fitting basis"
             fi 
-        fi
+        fi  
     done < "$BASIS_FILE"
     echo \* >> auxbasis
     echo \$end >> auxbasis
 else 
-    echo "do not generate ris auxbasis file"
+    echo "you choose not to generate ris auxbasis file"
 fi
 
 
