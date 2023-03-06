@@ -12,15 +12,15 @@ Note: a python implementation for TDDFT-ris (based on PySCF) is also available, 
 ## Usage
 In a finished `ridft` job directory where the `control` file exists, do
 ```
-$sh escfrisprep.sh -a s -c
+$sh escfrisprep.sh 
 ```
 ## Keywords
-- **-a** method, `s` or `s+p` (TDDFT-ris or TDDFT-ris+p). `s`: one s type fitting function for each atom; `s+p`: one s type fitting function for each atom, and an extra p type fitting function for each non-H atom.
-- **-b** basis, like `def2-TZVP` or `def2-SVP`, same as the basis set you use for the SCF calculaiton. By default it will be extracted from the `control` file
-- **-c** revise the control file to invoke the TDDFT-ris or TDDFT-ris+p method
-- **-u** Asign the $\theta$ value in exponent $\alpha_A = \theta/R_A^2$ for atom $A$. By default, $\theta=0.2$.
-- **-r** restore the `auxbasis` and `control` file from backup
-- **-h** help
+- **-b** method, `s` or `s+p` (TDDFT-ris or TDDFT-ris+p). `s`: one s type fitting function for each atom; `s+p`: one s type fitting function for each atom, and an extra p type fitting function for each non-H atom; `N`: do not creat the minimal auxbasis
+- **-x** A list of elements (in lower case) that you dont want to use minimal fitting basis. They will use full RIJK fitting basis automatically.
+- **-t** Asign the $\theta$ value in exponent $\alpha_A = \theta/R_A^2$ for atom $A$. By default, $\theta=0.2$.
+- **-c** `Y`: modify the control file; `N`: do not revise the control file
+- **-r** Recover the original setting from backup (mainly control file and auxbasis file).
+- **-h** help page
 
 
 ## Reference
