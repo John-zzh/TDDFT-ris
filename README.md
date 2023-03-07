@@ -2,25 +2,49 @@
 # escfrisprep: a plugin for the TDDFT-ris and TDDFT-ris+p method in TURBOMOLE
 This automative shell script invokes the TDDFT-ris method for Turbomole developmental version. Hopefully the release right after TURBOMOLE 7.7.
 
-The script inplace revises the `auxbasis` and `control` file, after creating a backup for them.
+The script in-place revises `control` file and generate a new `auxbasis` file, after creating a backup for them.
 
 Note: a python implementation for TDDFT-ris (based on PySCF) is also available, see [https://github.com/John-zzh/pyscf-ris](https://github.com/John-zzh/pyscf-ris)
 
 ## Prequest
-- Preload the Turbmole package (such as `module load turbomole`) to enable Turbmole tools `adg` `kdg`, which will be used by the this shell script.
+- Preload the Turbmole package (such as `module load turbomole`) to enable Turbmole tools `sdg` `adg` `kdg`, which will be used by the this shell script. Otherwise this script will not work.
 
 ## Usage
-In a finished `ridft` job directory where the `control` file exists, do
+In a finished `ridft` job directory where the `control` file exists, to invoke TDDFT-ris method:
 ```
-$sh escfrisprep.sh 
+$sh escfrisprep.sh
 ```
+
+To invoke TDDFT-risp method:
+```
+$sh escfrisprep.sh -b s+p
+```
+
+
+To invoke TDDFT-ris method with a pure functional:
+```
+$sh escfrisprep.sh -p Y
+```
+
+To invoke TDDFT-ris method on transition metal complex, i.e. ferrocene, with full fitting basis on `Fe` element:
+```
+$sh escfrisprep.sh -x fe
+```
+
+To restore your previous standard settings:
+```
+$sh escfrisprep.sh -r
+```
+
 ## Keywords
-- **-b** method, `s` or `s+p` (TDDFT-ris or TDDFT-ris+p). `s`: one s type fitting function for each atom; `s+p`: one s type fitting function for each atom, and an extra p type fitting function for each non-H atom; `N`: do not creat the minimal auxbasis
-- **-x** A list of elements (in lower case) that you dont want to use minimal fitting basis. They will use full RIJK fitting basis automatically.
-- **-t** Asign the $\theta$ value in exponent $\alpha_A = \theta/R_A^2$ for atom $A$. By default, $\theta=0.2$.
-- **-c** `Y`: modify the control file; `N`: do not revise the control file
-- **-r** Recover the original setting from backup (mainly control file and auxbasis file).
-- **-h** help page
+
+- **-b** `s`: one s type fitting function for each atom; `s+p`: one s type fitting function for each atom, and an extra p type fitting function for each non-H atom; `N`: do not create the minimal auxbasis. Default: `s`
+- **-x** A list of elements (in lower case) that you want to use full fitting basis. They will use full RIJK (RIJ in the case of pure density functional) fitting basis. Default:  (no exclusion)
+- **-p** `Y`: use pure density functional; `N`: use hybrid or RSH functional. This option only matters when using pure density functional and exclude some elements. Because those elements will use default RIJ fitting basis rather than RIJK. Default: `N`
+- **-t** Asign the $\theta$ value in exponent $\alpha_A = \theta/R_A^2$ for atom $A$. Default: `0.2`.
+- **-c** `Y`: modify the control file; `N`: do not revise the control file. Default: `Y`
+- **-r**  Restore the original setting from backup (mainly control file and auxbasis file).
+- **-h**  Help page
 
 
 ## Reference
