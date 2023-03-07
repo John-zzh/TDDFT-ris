@@ -37,9 +37,9 @@ do
             fi
             
             if [ $func == 'pbe' ];then
-                sed -i '41 s/$/ -p y/' escf.slurm
+                sed -i '41 s/$/ -m as/' escf.slurm
                
-                sed -i '51 s/$/ -p y/' escf.slurm
+                sed -i '51 s/$/ -m as/' escf.slurm
             fi
             
             

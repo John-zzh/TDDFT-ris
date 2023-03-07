@@ -7,21 +7,23 @@
     echo "             |           with TURBOMOLE             |"
     echo "             +--------------------------------------+"
     echo
-    echo "   Ref: Z. Zhou, F. Della Sala, S. M. Parker," 
-    echo "        J. Phys. Chem. Lett. 2023, 14, 7, 1968–1976"
+    echo "   Ref: 1. Z. Zhou, F. Della Sala, S. M. Parker," 
+    echo "           J. Phys. Chem. Lett. 2023, 14, 7, 1968–1976"
+    echo "        2. G. Giannone, F. Della Sala.," 
+    echo "           J. Chem. Phys. 2020, 153, 084110"
     echo
     echo "            $(date)"
     echo
 
 usage() {
     echo "Usage:"
-    echo "sh escfrisprep.sh [-b s/s+p/N] [-x Fe/Ni] [-t VALUE] [-c Y/N] [-r] "
+    echo "sh escfrisprep.sh [-b s/s+p/N] [-x Fe/Ni] [-t VALUE]  [-c Y/N] [-m as/ris] [-r] "
     echo "Description:"
     echo "-b: s -- one s type orbital per atom; p -- additional p orbital per non Hydrogen atom; N -- do not creat the minimal auxbasis"
     echo "-x: A list of elements that you dont want to use minimal fitting basis. They will use full RIJK fitting basis automatically"
     echo "-t: The global theta value in the orbital exponent alpha=theta/R^2. By default theta=0.2."
     echo "-c: Y -- modify the control file; N -- do not revise the control file"
-    echo "-p: Y -- use pure density functional; N -- use hybrid or RSH functional. By default use hybrid. Option Y/N only matters using pure density functional and exclude some elements that will use default RIJ fitting basis"
+    echo "-m: as -- use pure density functional (TDDFT-as); ris -- use hybrid or RSH functional (TDDFT-ris). By default use hybrid. This option only matters using pure density functional and exclude some elements that will use default RIJ fitting basis"
     echo "-r: Recover the original setting from backup (mainly control file and auxbasis file)"
     exit -1
 }
@@ -41,13 +43,28 @@ if [ -z "${CONTROL_FILE}" ]; then
     exit 0
 fi
 
+SCF_DG=$($SHOWDG scfinstab)
+# echo $SCF_DG
+if [[ "$SCF_DG" =~ 'rpas' ]];then
+    echo "rpa detected"
+elif [[ "$SCF_DG" =~ 'ciss' ]];then
+    echo "ciss detected"
+else
+    echo "no rpas or ciss found in \$scfinstab data group, please specify one of them"
+    exit 0
+fi
+
+if [[ -z $($SHOWDG 'closed shells') ]];then
+    echo "WARNING: you are working on open shell system."
+    echo "TDDFT-ris has smaller errors on closed shell systems"
+fi
 
 s_sp='s'
 revise='Y'
 theta=0.2
-pure='N'
+method='ris'
 
-while getopts "hrb:x:t:c:p:" optname
+while getopts "hrb:x:t:c:m:" optname
 do
     case "$optname" in
       "b")
@@ -66,8 +83,8 @@ do
       "c")
         revise=$OPTARG
         ;;
-      "p")
-        pure=$OPTARG
+      "m")
+        method=$OPTARG
         ;;
       "h") # Display help.
           usage
@@ -99,30 +116,30 @@ do
 done
 
 
-if [ "$pure" == "Y" ] || [ "$pure" == "y" ];then
-    echo "dealing with pure functional, use RIJ basis if any excluded elements"
+if [[ "$method" == 'as' ]];then
+    echo "dealing with pure functional"
     CBAS='jbas'
 else
-    echo "dealing with hybrid functional, use RIJK basis if any excluded elements"
+    echo "dealing with hybrid functional"
     CBAS='cbas'
 fi
     
     
-if [ "$revise" == "Y" ] || [ "$revise" == "y" ]; then
+if [[ "$revise" == "Y" || "$revise" == "y" ]]; then
     echo "modify the setting, turn on RIJK and turn off xckernel"
 
-    if [ -x "$TURBODIR/bin/${TARCHDIR}/adg" ]; then
+    if [[ -x "$TURBODIR/bin/${TARCHDIR}/adg" ]]; then
         ADD_DG="$TURBODIR/bin/${TARCHDIR}/adg"
-    elif [ -x "`which adg`" ]; then
+    elif [[ -x "`which adg`" ]]; then
         ADD_DG="adg"
     else
         echo "no adg tool found, please load Turbomole correctly"
         exit 0
     fi
 
-    if [ -x "$TURBODIR/bin/${TARCHDIR}/kdg" ]; then
+    if [[ -x "$TURBODIR/bin/${TARCHDIR}/kdg" ]]; then
         KILLDG="$TURBODIR/bin/${TARCHDIR}/kdg"
-    elif [ -x "`which kdg`" ]; then
+    elif [[ -x "`which kdg`" ]]; then
         KILLDG="kdg"
     else
         echo "no adg tool found, please load Turbomole correctly"
@@ -141,20 +158,19 @@ if [ "$revise" == "Y" ] || [ "$revise" == "y" ]; then
     fi
 
     
-    sed -i -e '/jkbas =/d' $CONTROL_FILE
-    if [ "$pure" == "N" ] || [ "$pure" == "n" ];then
+    if [[ "$method" == 'ris' ]];then
         $KILLDG jbas
         sed -i -e '/jbas  =/d' $CONTROL_FILE
         $ADD_DG rik
-    else
-        sed -i "s/cbas/jbas/g" $CONTROL_FILE
     fi
     
     $ADD_DG "$CBAS" file=auxbasis
     $KILLDG jkbas
+    sed -i -e '/jkbas =/d' $CONTROL_FILE
     $ADD_DG rij
     $ADD_DG escfnoxc
     $ADD_DG profile
+    echo "$CONTROL_FILE file revision done"
 else
     echo "you choose not to revise the $CONTROL_FILE file"
 fi
@@ -206,14 +222,29 @@ if [ $s_sp == 's' ] || [ $s_sp == 's+p' ] ;then
     echo \$"$CBAS" >> auxbasis
     
     
+    
+    is_excluded() {
+
+        for item in "$excluded_elements"
+        do
+            if [[ "$1" == "$item" ]]; then
+                return 0  # Variable found in list, return success
+            fi
+        done
+        return 1 
+    }  
+    
+    
     while read line; do
         # Extract the element symbol from the first word of each line of basis file
         cur_element=$(echo "$line" | awk '{print $1}')
     
-        # Use grep to check if $cur_element is pure letter and an element with turbulated radii
-        if  echo "$cur_element" | grep -q "^[[:alpha:]]*$"  && [[ "${elements[@]}" =~ "$cur_element" ]]; then
-            if [[ ! "$excluded_elements" =~ "$cur_element" ]]; then
-                echo "included element:" $cur_element
+        # Use grep to check if $cur_element is pure letter
+        if echo "$cur_element" | grep -q "^[[:alpha:]]*$"; then
+            if is_excluded $cur_element; then
+                echo "excluded element: $cur_element will use full fitting basis"
+            else
+                echo "included element: $cur_element" 
                 cur_radius=${radii_dict[$cur_element]}
                 echo \* >> auxbasis
                 echo $line >> auxbasis
@@ -226,8 +257,6 @@ if [ $s_sp == 's' ] || [ $s_sp == 's+p' ] ;then
                   echo '  1 p' >> auxbasis
                   echo ' ' $expo 1.0 >> auxbasis
                 fi
-            else
-                echo "$cur_element will use default fitting basis"
             fi 
         fi  
     done < "$BASIS_FILE"
