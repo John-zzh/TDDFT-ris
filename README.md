@@ -15,7 +15,7 @@ In a finished `ridft` job directory where the `control` file exists, to invoke T
 $sh escfrisprep.sh
 ```
 
-To invoke TDDFT-risp method:
+To invoke TDDFT-ris+p method:
 ```
 $sh escfrisprep.sh -b s+p
 ```
@@ -26,7 +26,7 @@ To invoke TDDFT-ris method with a pure functional:
 $sh escfrisprep.sh -m as
 ```
 
-To invoke TDDFT-ris method on transition metal complex, i.e. ferrocene, with full fitting basis on `Fe` element:
+To invoke TDDFT-ris+p method on transition metal complex, i.e. ferrocene, with full fitting basis on `Fe` element:
 ```
 $sh escfrisprep.sh -x fe
 ```
