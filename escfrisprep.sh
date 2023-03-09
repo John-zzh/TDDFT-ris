@@ -6,13 +6,12 @@
     echo "             |  prepare for TDDFT-ris calculations  |"
     echo "             |           with TURBOMOLE             |"
     echo "             +--------------------------------------+"
-    echo
-    echo "   Ref: 1. Z. Zhou, F. Della Sala, S. M. Parker," 
-    echo "           J. Phys. Chem. Lett. 2023, 14, 7, 1968–1976"
-    echo "        2. G. Giannone, F. Della Sala.," 
-    echo "           J. Chem. Phys. 2020, 153, 084110"
-    echo
-    echo "            $(date)"
+    echo 
+    echo "   Ref: 1. Z. Zhou, F. Della Sala, S. M. Parker,         " 
+    echo "           J. Phys. Chem. Lett. 2023, 14, 7, 1968–1976   "
+    echo "        2. G. Giannone, F. Della Sala.,                  " 
+    echo "           J. Chem. Phys. 2020, 153, 084110              "
+    echo "                     $(date)                             "
     echo
 
 usage() {
@@ -71,9 +70,9 @@ do
         s_sp=$OPTARG
         ;;
       "x")
-        excluded_elements=$OPTARG
-          if [ ! -z "${excluded_elements}" ]; then
-            echo "elements [ $excluded_elements ] will use the default full fitting basis"
+        excluded_elements+=($OPTARG)
+          if [[ ! -z $OPTARG ]]; then
+            echo "elements [ $OPTARG ] will use the default full fitting basis"
           fi      
         ;;
       "t")
@@ -225,7 +224,7 @@ if [ $s_sp == 's' ] || [ $s_sp == 's+p' ] ;then
     
     is_excluded() {
 
-        for item in "$excluded_elements"
+        for item in  ${excluded_elements[@]}
         do
             if [[ "$1" == "$item" ]]; then
                 return 0  # Variable found in list, return success
