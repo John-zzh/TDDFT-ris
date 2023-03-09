@@ -41,8 +41,9 @@ $sh escfrisprep.sh -r
 - **-b** `s`: one s type fitting function for each atom; `s+p`: one s type fitting function for each atom, and an extra p type fitting function for each non-H atom; `N`: do not create the minimal auxbasis. Default: `s`
 - **-x**  The element that you dont want to use the full RIJK fitting basis. Use -x multiple times if you want to exclude more than one element. Default:  (no exclusion)
 - **-m** `as`: use pure density functional; `ris`: use hybrid or RSH functional. This option only matters when using pure density functional and exclude some elements. Because those elements will use default RIJ fitting basis rather than RIJK. Default: `ris`
-- **-t** Asign the $\theta$ value in exponent $\alpha_A = \theta/R_A^2$ for atom $A$. Default: `0.2`.
+- **-t** Asign the $\theta$ value in exponent $\alpha_A = \theta/R_A^2$ for atom $A$. Default: `0.2`
 - **-c** `Y`: modify the control file; `N`: do not revise the control file. Default: `Y`
+- **-g** `Y`: revise the gridsize; `N`: do nothing. This option is for the dvelopmental version of Turomole that has not fully kill the grid in TDDFT-ris codes. Default: `N`
 - **-r**  Restore the original setting from backup (mainly control file and auxbasis file).
 - **-h**  Help page
 
