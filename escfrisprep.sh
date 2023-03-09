@@ -16,13 +16,14 @@
 
 usage() {
     echo "Usage:"
-    echo "sh escfrisprep.sh [-b s/s+p/N] [-x Fe] [-x Ag] [-t VALUE]  [-c Y/N] [-m as/ris] [-r] "
+    echo "sh escfrisprep.sh [-b s/s+p/N] [-x Fe] [-x Ag] [-t VALUE]  [-c Y/N] [-m as/ris] -g [Y/N] [-r] "
     echo "Description:"
     echo "-b: s -- one s type orbital per atom; p -- additional p orbital per non Hydrogen atom; N -- do not creat the minimal auxbasis"
     echo "-x: The element that you dont want to use the full RIJK fitting basis. Use -x multiple times if you want to exclude more than one element: -x ag -x au"
     echo "-t: The global theta value in the orbital exponent alpha=theta/R^2. By default theta=0.2."
     echo "-c: Y -- modify the control file; N -- do not revise the control file"
     echo "-m: as -- use pure density functional (TDDFT-as); ris -- use hybrid or RSH functional (TDDFT-ris). By default use hybrid. This option only matters using pure density functional and excluding some elements that will use default RIJ fitting basis"
+    echo "-g: Y -- revise the gridsize. This option is for the dvelopmental version of Turomole that has not fully kill the grid in TDDFT-ris codes."
     echo "-r: Recover the original setting from backup (mainly control file and auxbasis file)"
     exit -1
 }
@@ -62,8 +63,9 @@ s_sp='s'
 revise='Y'
 theta=0.2
 method='ris'
+revise_g='N'
 
-while getopts "hrb:x:t:c:m:" optname
+while getopts "hrb:x:t:c:m:g:" optname
 do
     case "$optname" in
       "b")
@@ -85,6 +87,9 @@ do
         ;;
       "m")
         method=$OPTARG
+        ;;
+       "g") #revise the grid settting
+        revise_g=$OPTARG
         ;;
       "h") # Display help.
           usage
@@ -124,6 +129,20 @@ else
     CBAS='cbas'
 fi
     
+    
+add_sub_data(){
+    # echo $1
+    # echo $2
+  # $1 = gridsize, keyword
+  # $2 = gridsize 1, new keyword
+
+  if [[ "$(grep $1 $CONTROL_FILE)" != "" ]];then # already has "gridsize"
+      sed -i "s/^.*$1.*$/ $2/" $CONTROL_FILE
+  else
+      sed -i "/functional/a\ $2" $CONTROL_FILE
+  fi
+  echo "added to \$dft data group: $2"
+}
     
 if [[ "$revise" == "Y" || "$revise" == "y" ]]; then
     echo "modify the setting, turn on RIJK and turn off xckernel"
@@ -170,6 +189,11 @@ if [[ "$revise" == "Y" || "$revise" == "y" ]]; then
     $ADD_DG rij
     $ADD_DG escfnoxc
     $ADD_DG profile
+    if [[ "$revise_g" == "Y" || "$revise_g" == "y" ]]; then
+        add_sub_data 'gridsize' 'gridsize 1'
+        add_sub_data 'gridtype' 'gridtype 0'
+        add_sub_data 'radsize' 'radsize 1'
+    fi
     echo "$CONTROL_FILE file revision done"
 else
     echo "you choose not to revise the $CONTROL_FILE file"
