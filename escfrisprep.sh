@@ -19,7 +19,7 @@ usage() {
     echo "sh escfrisprep.sh [-b s/s+p/N] [-x Fe] [-x Ag] [-t VALUE]  [-c Y/N] [-m as/ris] [-r] "
     echo "Description:"
     echo "-b: s -- one s type orbital per atom; p -- additional p orbital per non Hydrogen atom; N -- do not creat the minimal auxbasis"
-    echo "-x: The element (lower case) that you dont want to use the full RIJK fitting basis. Use -x multiple times if you want to exclude more than one element: -x ag -x au"
+    echo "-x: The element that you dont want to use the full RIJK fitting basis. Use -x multiple times if you want to exclude more than one element: -x ag -x au"
     echo "-t: The global theta value in the orbital exponent alpha=theta/R^2. By default theta=0.2."
     echo "-c: Y -- modify the control file; N -- do not revise the control file"
     echo "-m: as -- use pure density functional (TDDFT-as); ris -- use hybrid or RSH functional (TDDFT-ris). By default use hybrid. This option only matters using pure density functional and excluding some elements that will use default RIJ fitting basis"
