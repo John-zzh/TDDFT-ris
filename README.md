@@ -26,9 +26,9 @@ To invoke TDDFT-ris method with a pure functional:
 $sh escfrisprep.sh -m as
 ```
 
-To invoke TDDFT-ris+p method on transition metal complex, i.e. ferrocene, with full fitting basis on `Fe` element and 'S' element:
+To invoke TDDFT-ris+p method on transition metal complex, i.e. ferrocene, with full fitting basis on `Fe` element and `S` element:
 ```
-$sh escfrisprep.sh -x fe -x s
+$sh escfrisprep.sh -x Fe -x S
 ```
 
 To restore your previous standard settings:
@@ -39,7 +39,7 @@ $sh escfrisprep.sh -r
 ## Keywords
 
 - **-b** `s`: one s type fitting function for each atom; `s+p`: one s type fitting function for each atom, and an extra p type fitting function for each non-H atom; `N`: do not create the minimal auxbasis. Default: `s`
-- **-x**  The element (lower case) that you dont want to use the full RIJK fitting basis. Use -x multiple times if you want to exclude more than one element. Default:  (no exclusion)
+- **-x**  The element that you dont want to use the full RIJK fitting basis. Use -x multiple times if you want to exclude more than one element. Default:  (no exclusion)
 - **-m** `as`: use pure density functional; `ris`: use hybrid or RSH functional. This option only matters when using pure density functional and exclude some elements. Because those elements will use default RIJ fitting basis rather than RIJK. Default: `ris`
 - **-t** Asign the $\theta$ value in exponent $\alpha_A = \theta/R_A^2$ for atom $A$. Default: `0.2`.
 - **-c** `Y`: modify the control file; `N`: do not revise the control file. Default: `Y`
