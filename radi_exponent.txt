@@ -1,5 +1,5 @@
-#	#	#	theta = 1	theta = 0.2 (optimal)
-#Atomic No.	Elements	Radii, Å	1/R^2	0.2/R^2
+#	#	#	theta=1	theta=0.2(optimal)
+#No. Elements Radii(Å） 1/R^2 0.2/R^2
 1	H	0.5292	0.999914019	0.199982804
 2	He	0.3113	2.889642307	0.577928461
 3	Li	1.6283	0.105616916	0.021123383
