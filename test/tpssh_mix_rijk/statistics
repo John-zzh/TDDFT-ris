@@ -1,0 +1,131 @@
+
+ DSCF STATISTICS OUTPUT :
+
+ integral neglect threshold       :  0.33E-10
+ integral storage threshold THIZE :  0.10E-04
+ integral storage threshold THIME :         5
+
+ cpu-time for construction of rho     :        0.085 s
+
+
+
+ --------------------    1.ITERATION  --------------------
+  cpu-time for ri-coulomb part        :        0.003 s
+ wall-time for ri-coulomb part        :        0.003 s
+
+  cpu-time for xc part                :        1.087 s
+ wall-time for xc part                :        1.087 s
+
+  cpu-time for rik-exchange part      :        0.016 s
+ wall-time for rik-exchange part      :        0.026 s
+
+ eigenvalue        1 after current iteration:   0.26756297D+00
+ eigenvalue        2 after current iteration:   0.33411671D+00
+ eigenvalue        3 after current iteration:   0.34029390D+00
+ eigenvalue        4 after current iteration:   0.36296542D+00
+ eigenvalue        5 after current iteration:   0.37629433D+00
+
+
+ --------------------    2.ITERATION  --------------------
+  cpu-time for ri-coulomb part        :        0.001 s
+ wall-time for ri-coulomb part        :        0.001 s
+
+  cpu-time for xc part                :        0.575 s
+ wall-time for xc part                :        0.575 s
+
+  cpu-time for rik-exchange part      :        0.010 s
+ wall-time for rik-exchange part      :        0.021 s
+
+ eigenvalue        1 after current iteration:   0.26583651D+00
+ eigenvalue        2 after current iteration:   0.33278507D+00
+ eigenvalue        3 after current iteration:   0.33473314D+00
+ eigenvalue        4 after current iteration:   0.36202241D+00
+ eigenvalue        5 after current iteration:   0.37374236D+00
+
+
+ --------------------    3.ITERATION  --------------------
+  cpu-time for ri-coulomb part        :        0.001 s
+ wall-time for ri-coulomb part        :        0.001 s
+
+  cpu-time for xc part                :        0.573 s
+ wall-time for xc part                :        0.573 s
+
+  cpu-time for rik-exchange part      :        0.010 s
+ wall-time for rik-exchange part      :        0.016 s
+
+ eigenvalue        1 after current iteration:   0.26581173D+00
+ eigenvalue        2 after current iteration:   0.33276410D+00
+ eigenvalue        3 after current iteration:   0.33435533D+00
+ eigenvalue        4 after current iteration:   0.36200667D+00
+ eigenvalue        5 after current iteration:   0.37365197D+00
+
+
+ --------------------    4.ITERATION  --------------------
+  cpu-time for ri-coulomb part        :        0.002 s
+ wall-time for ri-coulomb part        :        0.002 s
+
+  cpu-time for xc part                :        0.566 s
+ wall-time for xc part                :        0.566 s
+
+  cpu-time for rik-exchange part      :        0.009 s
+ wall-time for rik-exchange part      :        0.023 s
+
+ eigenvalue        1 after current iteration:   0.26581168D+00
+ eigenvalue        2 after current iteration:   0.33276397D+00
+ eigenvalue        3 after current iteration:   0.33431853D+00
+ eigenvalue        4 after current iteration:   0.36200650D+00
+ eigenvalue        5 after current iteration:   0.37365080D+00
+
+
+ --------------------    5.ITERATION  --------------------
+  cpu-time for ri-coulomb part        :        0.001 s
+ wall-time for ri-coulomb part        :        0.001 s
+
+  cpu-time for xc part                :        0.553 s
+ wall-time for xc part                :        0.553 s
+
+  cpu-time for rik-exchange part      :        0.009 s
+ wall-time for rik-exchange part      :        0.016 s
+
+ eigenvalue        1 after current iteration:   0.26581168D+00
+ eigenvalue        2 after current iteration:   0.33276397D+00
+ eigenvalue        3 after current iteration:   0.33431728D+00
+ eigenvalue        4 after current iteration:   0.36200650D+00
+ eigenvalue        5 after current iteration:   0.37365078D+00
+
+
+ --------------------    6.ITERATION  --------------------
+  cpu-time for ri-coulomb part        :        0.001 s
+ wall-time for ri-coulomb part        :        0.001 s
+
+  cpu-time for xc part                :        0.257 s
+ wall-time for xc part                :        0.257 s
+
+  cpu-time for rik-exchange part      :        0.005 s
+ wall-time for rik-exchange part      :        0.011 s
+
+ eigenvalue        1 after current iteration:   0.26581168D+00
+ eigenvalue        2 after current iteration:   0.33276397D+00
+ eigenvalue        3 after current iteration:   0.33431724D+00
+ eigenvalue        4 after current iteration:   0.36200650D+00
+ eigenvalue        5 after current iteration:   0.37365078D+00
+
+
+ --------------------    7.ITERATION  --------------------
+  cpu-time for ri-coulomb part        :        0.001 s
+ wall-time for ri-coulomb part        :        0.001 s
+
+  cpu-time for xc part                :        0.160 s
+ wall-time for xc part                :        0.160 s
+
+  cpu-time for rik-exchange part      :        0.005 s
+ wall-time for rik-exchange part      :        0.019 s
+
+ eigenvalue        1 after current iteration:   0.26581168D+00
+ eigenvalue        2 after current iteration:   0.33276397D+00
+ eigenvalue        3 after current iteration:   0.33431724D+00
+ eigenvalue        4 after current iteration:   0.36200650D+00
+ eigenvalue        5 after current iteration:   0.37365078D+00
+
+  escf  : cpu elapsed         4.120 s
+          wall                5.353 s

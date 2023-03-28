@@ -1,0 +1,42 @@
+$title
+$symmetry c1
+$redundant    file=coord
+$coord    file=coord
+$atoms
+c  1
+    basis =c def2-TZVP
+h  2,4-6
+    basis =h def-SV(P)
+o  3
+    basis =o def-SV(P)
+$basis    file=basis
+$scfmo   file=mos
+$closed shells
+ a       1-9                                    ( 2 )
+$scfiterlimit       30
+$scfdamp   start=0.300  step=0.050  min=0.100
+$scfdump
+$scfdiis
+$scforbitalshift  automatic=.1
+$energy    file=energy
+$grad    file=gradient
+$dft
+    functional   tpssh
+    gridsize   3
+$scfconv   7
+$scfinstab rpas
+$soes
+ a            5
+#$maxcor    500 MiB  per_core
+$denconv 1d-7
+$rundimensions
+   natoms=6
+$last step     escf
+$orbital_max_rnorm 0.64614596364237E-06
+$last SCF energy change = -115.65834
+$charge from dscf
+         -0.000 (not to be modified here)
+$dipole from dscf
+  x    -0.29194523490600    y    -0.54890073140254    z    -0.14620749115383    a.u.
+   | dipole | =    1.6233520631  debye
+$end

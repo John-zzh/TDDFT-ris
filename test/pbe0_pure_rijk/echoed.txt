@@ -1,0 +1,24 @@
+
+             +--------------------------------------+
+             |            escfrisprep               |
+             |  prepare for TDDFT-ris calculations  |
+             |           with TURBOMOLE             |
+             +--------------------------------------+
+
+   Ref: 1. Z. Zhou, F. Della Sala, S. M. Parker,         
+           J. Phys. Chem. Lett. 2023, 14, 7, 1968–1976   
+        2. G. Giannone, F. Della Sala.,                  
+           J. Chem. Phys. 2020, 153, 084110              
+                     Thu Mar  9 11:48:25 EST 2023                             
+
+rpa detected
+elements [ c ] will use the default full fitting basis
+elements [ h ] will use the default full fitting basis
+dealing with hybrid functional
+modify the setting, turn on RIJK and turn off xckernel
+control file is control
+control file revision done
+generate ris auxbasis file
+excluded element: c will use full fitting basis
+excluded element: h will use full fitting basis
+included element: o

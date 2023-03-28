@@ -1,0 +1,25 @@
+
+             +--------------------------------------+
+             |            escfrisprep               |
+             |  prepare for TDDFT-ris calculations  |
+             |           with TURBOMOLE             |
+             +--------------------------------------+
+
+   Ref: 1. Z. Zhou, F. Della Sala, S. M. Parker,         
+           J. Phys. Chem. Lett. 2023, 14, 7, 1968–1976   
+        2. G. Giannone, F. Della Sala.,                  
+           J. Chem. Phys. 2020, 153, 084110              
+                     Thu Mar  9 13:19:39 EST 2023                             
+
+rpa detected
+dealing with hybrid functional
+modify the setting, turn on RIJK and turn off xckernel
+control file is control
+gridsize 1
+gridtype 0
+radsize 1
+control file revision done
+generate ris auxbasis file
+included element: h
+included element: o
+included element: c

@@ -1,0 +1,46 @@
+Copying working directory from "/home/zzz6/turbomole_tool/TDDFT-ris/test/pbe0_pure_rij" to "/scratch/pbsjobs/job.18709549.hpc"
+sending incremental file list
+./
+auxbasis
+basis
+control
+coord
+define.inp
+define.out
+energy
+escf-escf2.out
+escf-ris-x.out
+escf-ris.out
+escf.slurm
+escf1.out
+escf2.slurm
+exspectrum-final
+exspectrum-initial
+exspectrum-ris
+exspectrum-ris-x
+moments
+mos
+ridft.out
+slurm-18681657.out
+slurm-18709548.out
+statistics
+
+sent 236,045 bytes  received 456 bytes  473,002.00 bytes/sec
+total size is 234,425  speedup is 0.99
+Changing directory to "/scratch/pbsjobs/job.18709549.hpc"
+ define ended normally 
+ ridft ended normally
+
+Copying results from "/scratch/pbsjobs/job.18709549.hpc" to "/home/zzz6/turbomole_tool/TDDFT-ris/test/pbe0_pure_rij"
+sending incremental file list
+./
+control
+define.out
+energy
+mos
+ridft_extype.out
+statistics
+
+sent 196,229 bytes  received 325 bytes  393,108.00 bytes/sec
+total size is 258,508  speedup is 1.32
+Copied successfully, removing temporary files

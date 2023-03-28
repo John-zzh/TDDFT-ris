@@ -1,0 +1,102 @@
+Copying working directory from "/home/zzz6/turbomole_tool/TDDFT-ris/test/pbe_pure_rij" to "/scratch/pbsjobs/job.18737161.hpc"
+sending incremental file list
+./
+auxbasis
+basis
+control
+coord
+define.inp
+energy
+escf.slurm
+exspectrum-final
+exspectrum-initial
+exspectrum-ris
+exspectrum-ris-x
+moments
+mos
+statistics
+
+sent 183,184 bytes  received 285 bytes  73,387.60 bytes/sec
+total size is 182,190  speedup is 0.99
+Changing directory to "/scratch/pbsjobs/job.18737161.hpc"
+ define ended normally 
+ ridft ended normally
+ escf ended abnormally
+program stopped.
+rm: cannot remove ‘sing_a’: No such file or directory
+mv: cannot stat ‘exspectrum’: No such file or directory
+
+             +--------------------------------------+
+             |            escfrisprep               |
+             |  prepare for TDDFT-ris calculations  |
+             |           with TURBOMOLE             |
+             +--------------------------------------+
+
+   Ref: 1. Z. Zhou, F. Della Sala, S. M. Parker,         
+           J. Phys. Chem. Lett. 2023, 14, 7, 1968–1976   
+        2. G. Giannone, F. Della Sala.,                  
+           J. Chem. Phys. 2020, 153, 084110              
+                     Tue Mar 28 01:48:19 EDT 2023                             
+
+Data group $scfinstab not found in file control
+no rpas or ciss found in $scfinstab data group, please specify one of them
+ escf ended abnormally
+program stopped.
+rm: cannot remove ‘sing_a’: No such file or directory
+mv: cannot stat ‘exspectrum’: No such file or directory
+
+             +--------------------------------------+
+             |            escfrisprep               |
+             |  prepare for TDDFT-ris calculations  |
+             |           with TURBOMOLE             |
+             +--------------------------------------+
+
+   Ref: 1. Z. Zhou, F. Della Sala, S. M. Parker,         
+           J. Phys. Chem. Lett. 2023, 14, 7, 1968–1976   
+        2. G. Giannone, F. Della Sala.,                  
+           J. Chem. Phys. 2020, 153, 084110              
+                     Tue Mar 28 01:48:19 EDT 2023                             
+
+Data group $scfinstab not found in file control
+no rpas or ciss found in $scfinstab data group, please specify one of them
+ escf ended abnormally
+program stopped.
+rm: cannot remove ‘sing_a’: No such file or directory
+mv: cannot stat ‘exspectrum’: No such file or directory
+
+             +--------------------------------------+
+             |            escfrisprep               |
+             |  prepare for TDDFT-ris calculations  |
+             |           with TURBOMOLE             |
+             +--------------------------------------+
+
+   Ref: 1. Z. Zhou, F. Della Sala, S. M. Parker,         
+           J. Phys. Chem. Lett. 2023, 14, 7, 1968–1976   
+        2. G. Giannone, F. Della Sala.,                  
+           J. Chem. Phys. 2020, 153, 084110              
+                     Tue Mar 28 01:48:19 EDT 2023                             
+
+Data group $scfinstab not found in file control
+no rpas or ciss found in $scfinstab data group, please specify one of them
+ escf ended abnormally
+program stopped.
+rm: cannot remove ‘sing_a’: No such file or directory
+mv: cannot stat ‘exspectrum’: No such file or directory
+
+Copying results from "/scratch/pbsjobs/job.18737161.hpc" to "/home/zzz6/turbomole_tool/TDDFT-ris/test/pbe_pure_rij"
+sending incremental file list
+./
+control
+define.out
+energy
+escf-escf2.out
+escf-ris-x.out
+escf-ris.out
+escf1.out
+mos
+ridft.out
+statistics
+
+sent 207,553 bytes  received 369 bytes  3,494.49 bytes/sec
+total size is 226,150  speedup is 1.09
+Copied successfully, removing temporary files

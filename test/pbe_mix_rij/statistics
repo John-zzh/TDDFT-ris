@@ -1,0 +1,110 @@
+
+ DSCF STATISTICS OUTPUT :
+
+ integral neglect threshold       :  0.33E-10
+ integral storage threshold THIZE :  0.10E-04
+ integral storage threshold THIME :         5
+
+ cpu-time for construction of rho     :        0.078 s
+
+
+
+ --------------------    1.ITERATION  --------------------
+  cpu-time for ri-coulomb part        :        0.002 s
+ wall-time for ri-coulomb part        :        0.002 s
+
+  cpu-time for xc part                :        0.630 s
+ wall-time for xc part                :        0.630 s
+
+ eigenvalue        1 after current iteration:   0.60969089D-01
+ eigenvalue        2 after current iteration:   0.93664412D-01
+ eigenvalue        3 after current iteration:   0.10142363D+00
+ eigenvalue        4 after current iteration:   0.11438456D+00
+ eigenvalue        5 after current iteration:   0.12292072D+00
+
+
+ --------------------    2.ITERATION  --------------------
+  cpu-time for ri-coulomb part        :        0.001 s
+ wall-time for ri-coulomb part        :        0.001 s
+
+  cpu-time for xc part                :        0.335 s
+ wall-time for xc part                :        0.335 s
+
+ eigenvalue        1 after current iteration:   0.59910125D-01
+ eigenvalue        2 after current iteration:   0.92404586D-01
+ eigenvalue        3 after current iteration:   0.97440537D-01
+ eigenvalue        4 after current iteration:   0.11375697D+00
+ eigenvalue        5 after current iteration:   0.12073906D+00
+
+
+ --------------------    3.ITERATION  --------------------
+  cpu-time for ri-coulomb part        :        0.001 s
+ wall-time for ri-coulomb part        :        0.001 s
+
+  cpu-time for xc part                :        0.335 s
+ wall-time for xc part                :        0.335 s
+
+ eigenvalue        1 after current iteration:   0.59904350D-01
+ eigenvalue        2 after current iteration:   0.92400664D-01
+ eigenvalue        3 after current iteration:   0.97120711D-01
+ eigenvalue        4 after current iteration:   0.11375492D+00
+ eigenvalue        5 after current iteration:   0.12071558D+00
+
+
+ --------------------    4.ITERATION  --------------------
+  cpu-time for ri-coulomb part        :        0.001 s
+ wall-time for ri-coulomb part        :        0.001 s
+
+  cpu-time for xc part                :        0.330 s
+ wall-time for xc part                :        0.330 s
+
+ eigenvalue        1 after current iteration:   0.59904346D-01
+ eigenvalue        2 after current iteration:   0.92400646D-01
+ eigenvalue        3 after current iteration:   0.97096045D-01
+ eigenvalue        4 after current iteration:   0.11375491D+00
+ eigenvalue        5 after current iteration:   0.12071544D+00
+
+
+ --------------------    5.ITERATION  --------------------
+  cpu-time for ri-coulomb part        :        0.001 s
+ wall-time for ri-coulomb part        :        0.001 s
+
+  cpu-time for xc part                :        0.270 s
+ wall-time for xc part                :        0.270 s
+
+ eigenvalue        1 after current iteration:   0.59904346D-01
+ eigenvalue        2 after current iteration:   0.92400646D-01
+ eigenvalue        3 after current iteration:   0.97095572D-01
+ eigenvalue        4 after current iteration:   0.11375491D+00
+ eigenvalue        5 after current iteration:   0.12071544D+00
+
+
+ --------------------    6.ITERATION  --------------------
+  cpu-time for ri-coulomb part        :        0.003 s
+ wall-time for ri-coulomb part        :        0.003 s
+
+  cpu-time for xc part                :        0.107 s
+ wall-time for xc part                :        0.107 s
+
+ eigenvalue        1 after current iteration:   0.59904346D-01
+ eigenvalue        2 after current iteration:   0.92400646D-01
+ eigenvalue        3 after current iteration:   0.97095564D-01
+ eigenvalue        4 after current iteration:   0.11375491D+00
+ eigenvalue        5 after current iteration:   0.12071544D+00
+
+
+ --------------------    7.ITERATION  --------------------
+  cpu-time for ri-coulomb part        :        0.000 s
+ wall-time for ri-coulomb part        :        0.000 s
+
+  cpu-time for xc part                :        0.103 s
+ wall-time for xc part                :        0.103 s
+
+ eigenvalue        1 after current iteration:   0.59904346D-01
+ eigenvalue        2 after current iteration:   0.92400646D-01
+ eigenvalue        3 after current iteration:   0.97095563D-01
+ eigenvalue        4 after current iteration:   0.11375491D+00
+ eigenvalue        5 after current iteration:   0.12071544D+00
+
+  escf  : cpu elapsed         2.312 s
+          wall                2.764 s

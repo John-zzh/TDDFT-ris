@@ -56,14 +56,3 @@ done
         
         
         
-        
-        
-        
-        
-        
-        
-            # for ris_basis in s s+p
-            # do
-            #     for exclude in o NA
-            #     do
-                
