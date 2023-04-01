@@ -121,23 +121,59 @@ do
 done
 
 
-if [[ "$method" == 'as' ]];then
-    echo "dealing with pure functional"
-    CBAS='jbas'
-elif [[ "$method" == 'ris' ]];then
-    echo "dealing with hybrid functional"
-    CBAS='cbas'
-elif [[ "$method" == 'auto' ]];then
-    echo "automatically detect pure or hybrid functional"
-    FUNC_TYPE=$($SHOWDG xctype)
-    if [[ "$FUNC_TYPE" == 'LDA' || "$FUNC_TYPE" == 'GGA' || "$FUNC_TYPE" == 'MGGA' ]];then
-        echo "dealing with pure functional"
-        CBAS='jbas'
+if [[ "$method" == 'auto' ]]; then                   
+    FUNC_TYPE=$($SHOWDG xctype | awk '{print $2}')
+    ISDFT=$($SHOWDG dft) 
+    if [[ ! -z "$ISDFT" ]]; then 
+    if [[ -z "$FUNC_TYPE" ]]; then
+      echo "!!! WARNING !!! \$xctype not found in control"
+      echo "assuming TDDFT-ris"   
+      method='ris'
     else
-        echo "dealing with hybrid functional"
-        CBAS='cbas'   
+     echo "method is auto; xctype= " $FUNC_TYPE
+     if [[ "$FUNC_TYPE" == 'LDA' || "$FUNC_TYPE" == 'GGA' || "$FUNC_TYPE" == 'MGGA' ]]; then
+        method='as'
+     elif [[ "$FUNC_TYPE" == 'localhyb' ]]; then
+        echo "Local Hybrids not supported"
+        exit -1
+     else
+        method='ris'  
+     fi
+    fi
+    else
+      echo "Ground-state is Hartee-Fock"
+      echo "assuming TDDFT-ris"
+      method='ris'            
     fi
 fi
+
+if [[ "$method" == 'as' ]]; then
+    echo "method is TDDFT-as : minimal auxbasis for Coulomb"
+    XBAS='jbas'
+elif  [[ "$method" == 'ris' ]]; then 
+    echo "method is TDDFT-ris : minimal auxbasis for Coulomb and Exchange"
+    XBAS='cbas'
+else
+   echo "Method " $method "is incorrect"
+   exit -1 
+fi
+
+echo "minimal auxbasis in " "\$"$XBAS
+
+sizebas=`$SHOWDG $CBAS | wc -l` 
+#echo $sizebas
+if [[  "$sizebas" -lt "2" ]]; then  
+ echo "no \$"$CBAS  "found" 
+ if [[ "$CBAS" == "cbas" ]]; then
+  echo "Set up an ordinary calculation TDDFT calculation RIJK (hybrid XC)"      
+ elif [[ "$CBAS" == "jbas" ]]; then        
+  echo "Set up an ordinary calculation TDDFT calculation RIJ (semilocal XC)"                
+ fi
+ exit -1  
+fi
+
+echo "theta is " $theta   
+
     
     
 add_sub_data(){
