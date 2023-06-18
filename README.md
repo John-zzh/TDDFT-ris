@@ -4,7 +4,7 @@ This automative shell script invokes the TDDFT-ris method for Turbomole developm
 
 The script in-place revises `control` file and generate a new `auxbasis` file, after creating a backup for them.
 
-Note: a python implementation for TDDFT-ris (based on PySCF) is also available, see [https://github.com/John-zzh/pyscf-ris](https://github.com/John-zzh/pyscf-ris)
+Note: a python implementation for TDDFT-ris (based on PySCF) is also available to interface with Gaussian/ORCA, see [https://github.com/John-zzh/pyscf_TDDFT_ris](https://github.com/John-zzh/pyscf_TDDFT_ris)
 
 ## Prequest
 - Preload the Turbmole package (such as `module load turbomole`) to enable Turbmole tools `sdg` `adg` `kdg`, which will be used by the this shell script. Otherwise this script will not work.
