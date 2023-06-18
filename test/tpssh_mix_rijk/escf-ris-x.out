@@ -1,0 +1,889 @@
+
+ escf (compt230) : TURBOMOLE rev. V7-6-2381-g96b3af1 compiled 16 Jan 2023 at 13:48:01
+ Copyright (C) 2023 TURBOMOLE GmbH, Karlsruhe
+
+
+    2023-03-08 01:08:27.265 
+
+
+ escf run will be profiled !
+
+
+
+
+                                e s c f
+
+                             TURBOMOLE GmbH
+
+          integral direct evaluation of 
+
+                    * excitation energies and transition moments 
+                    * polarizabilities
+                    * dynamic response properties 
+                    * stabilities
+                    * quasiparticle states with GW
+                    * NMR coupling-constants
+
+
+
+          references (see also programs dscf and ridft) 
+          implementation and benchmarks (review) 
+          F. Furche and D. Rappoport,  
+          "Density functional methods for excited states: 
+          equilibrium structure and electronic spectra",
+          ch. III of "Computational Photochemistry", ed. by 
+          M. Olivucci, vol. 16 of "Theoretical and Computational 
+          Chemistry", Elsevier, Amsterdam, 2005.
+
+
+
+              +--------------------------------------------------+
+              | Atomic coordinate, charge and isotop information |
+              +--------------------------------------------------+
+
+                    atomic coordinates            atom    charge  isotop
+         -9.24314180    6.23174984    0.00054802    c      6.000     0
+         -9.98177905    5.77299993   -1.91166584    h      1.000     0
+         -6.60094563    6.20640861   -0.00619830    o      8.000     0
+         -9.98177905    4.88256098    1.43120298    h      1.000     0
+         -9.90212710    8.15492412    0.51283388    h      1.000     0
+         -6.10304059    4.45939461   -0.47154336    h      1.000     0
+ 
+       center of nuclear mass  :   -7.89226438    6.16696788   -0.01670470
+       center of nuclear charge:   -8.01306343    6.12842487   -0.02697059
+
+              +--------------------------------------------------+
+              |               basis set information              |
+              +--------------------------------------------------+
+
+              we will work with the 1s 3p 5d 7f 9g ... basis set
+              ...i.e. with spherical basis functions...
+
+   type   atoms  prim   cont   basis
+   ---------------------------------------------------------------------------
+    c        1     46     31   def2-TZVP   [5s3p2d1f|11s6p2d1f]
+    h        4      4      2   def-SV(P)   [2s|4s]
+    o        1     24     14   def-SV(P)   [3s2p1d|7s4p1d]
+   ---------------------------------------------------------------------------
+   total:    6     86     53
+   ---------------------------------------------------------------------------
+
+   total number of primitive shells          :   36
+   total number of contracted shells         :   25
+   total number of cartesian basis functions :   59
+   total number of SCF-basis functions       :   53
+
+
+ residuum convergence criterium   :  0.10E-04
+
+
+ integral neglect threshold       :  0.33E-10
+ integral storage threshold THIZE :  0.10E-04
+ integral storage threshold THIME :         5
+
+ 
+             FOUND RI-J FLAG !
+ 
+  
+ AUXILIARY BASIS SET information:
+ Basis set with nickname o def-SV(P) is not contained within file auxbasis
+              read basis sets from /home/smp201/dev/turbomole/cbasen/
+              (basis sets have been saved in file auxbasis)
+
+              we will work with the 1s 3p 5d 7f 9g ... basis set
+              ...i.e. with spherical basis functions...
+
+   type   atoms  prim   cont   basis
+   ---------------------------------------------------------------------------
+    c        1      4      4   def2-TZVP   [1s1p|1s1p]
+    h        4      1      1   def-SV(P)   [1s|1s]
+    o        1     72     48   def-SV(P)   [6s5p4d1f|8s6p5d3f]
+   ---------------------------------------------------------------------------
+   total:    6     80     56
+   ---------------------------------------------------------------------------
+
+   total number of primitive shells          :   25
+   total number of contracted shells         :   22
+   total number of cartesian basis functions :   63
+   total number of SCF-basis functions       :   56
+
+ 
+             FOUND RI-K FLAG !
+ 
+  
+ AUXILIARY BASIS SET information:
+
+              we will work with the 1s 3p 5d 7f 9g ... basis set
+              ...i.e. with spherical basis functions...
+
+   type   atoms  prim   cont   basis
+   ---------------------------------------------------------------------------
+    c        1      4      4   def2-TZVP   [1s1p|1s1p]
+    h        4      1      1   def-SV(P)   [1s|1s]
+    o        1     72     48   def-SV(P)   [6s5p4d1f|8s6p5d3f]
+   ---------------------------------------------------------------------------
+   total:    6     80     56
+   ---------------------------------------------------------------------------
+
+   total number of primitive shells          :   25
+   total number of contracted shells         :   22
+   total number of cartesian basis functions :   63
+   total number of SCF-basis functions       :   56
+
+ RPA SINGLET-EXCITATION-CALCULATION 
+ 
+             FOUND DFT-FLAG !
+ 
+
+ maximum number of Davidson iterations set to   35
+
+
+ symmetry group of the molecule :   c1 
+
+ the group has the following generators :
+   c1(z)
+
+    1 symmetry operations found
+
+ there are 1 real representations :   a   
+
+ maximum number of shells which are related by symmetry :  1
+
+ IRREPs of excited states :   a   
+  
+           ------------------
+           density functional
+           ------------------
+ TPSS global hybrid functional
+ exchange:    9/10 (LDA+TPSS) + 1/10 HF
+ correlation: LDA (PW) + TPSS
+ spherical integration : Lebedev's spherical grid
+ spherical gridsize    :                     3
+    i.e. gridpoints    :                   302
+  maximum batchsize    :                   100
+ value for diffuse not defined
+ radial integration    : Chebyshev 2nd kind (scaling 3)
+ radial gridsize       :                     3
+ integration cells     :                     6
+ partition function    : becke
+ partition sharpness   :                     3
+  
+
+ The current-density response will be included
+ for meta-GGA and LHF functionals in TDDFT.
+
+
+ ----------------------------------------------------------------------
+          some useful papers before it begins
+ ----------------------------------------------------------------------
+
+     nonorthonormal Krylov space methods 
+     F. Furche, B. T. Krull, B. D. Nguyen, and J. Kwon, 
+     J. Chem. Phys. 144, 174105 (2016).
+
+     current-density dependent meta-GGA linear response
+     excitation energies.
+     J. E. Bates and F. Furche, 
+     J. Chem. Phys. 137, 164105 (2012).
+
+     More current-density dependent meta-GGA response
+     NMR couplings, SCF instabilities, damped response, etc.
+     C. Holzer, Y. J. Franzke, and M. Kehry, 
+     J. Chem. Theory Comput. 17, 2928 (2021).
+
+     RI-J method 
+     R. Bauernschmitt, M. Haeser, O. Treutler, and R. Ahlrichs,
+     Chem. Phys. Lett. 264, 573 (1997).
+
+     density functional implementation               
+     R. Bauernschmitt and R. Ahlrichs,
+     Chem. Phys. Lett. 256, 454 (1996).
+     R. Bauernschmitt and R. Ahlrichs,
+     J. Chem. Phys. 104, 9047 (1996).
+
+     UHF extension (RPA and CIS)
+     C. Ochsenfeld, J. Gauss, and R. Ahlrichs, 
+     J. Chem. Phys. 103, 7401 (1995).
+
+     integral direct algorithm                 
+     H. Weiss, R. Ahlrichs, and M. Haeser, 
+     J. Chem. Phys. 99, 1262 (1993).
+
+ ----------------------------------------------------------------------
+
+  MOs are in ASCII format !
+
+
+    mo occupation :
+   irrep   mo's   occupied
+    a       53        9
+ 
+ number of basis functions   :    53
+ number of occupied orbitals :     9
+ 
+
+ reading orbital data $scfmo  from file mos
+ orbital characterization : scfconv=7
+  
+           ----------------------
+               RI - INFORMATION
+           ----------------------
+
+ biggest AO integral is expected to be     5.725698708
+
+ Threshold for integral neglect (rithr2):   0.33E-10
+ Threshold for integral neglect (rithr1):   0.33E-10
+
+ Contributions to RI integral batches: 
+  neglected integral batches:                     1
+  direct contribution:                            0
+  memory contribution:                   324
+ Core memory available (ricore)            500 MiB
+ Core memory needed for (P|Q) and Cholesky 1 MiB
+ Core memory used for integrals            1 MiB
+  
+ ****************************************
+ Memory allocated for RIDFT 1 MiB
+ ****************************************
+                                            
+
+ MAXIMUM CORE MEMORY WHICH CAN BE ALLOCATED DYNAMICALLY in escf_cc_setup= 500 MiB
+              ( or 65536000 double words )
+
+ Summary of integral storage options:
+ B_ji^Q integral storage mode: on-disk   
+ B_ai^Q integral storage mode: on-disk   
+ B_ba^Q integral storage mode: on-disk   
+
+   *-----------------------------------------------------------------------*
+   |                     program will use  1 thread(s)                     |
+   *-----------------------------------------------------------------------*
+  MOs are in ASCII format !
+
+
+ reading orbital data $scfmo  from file mos
+ orbital characterization : scfconv=7
+ time elapsed for calculating density matrices :   0.001 sec
+ all orbitals will be active in the correlation treatment
+
+
+   Molecular Orbital Statistic:
+   ============================
+
+   -----------------------------
+   orbitals in total:
+   -----------------------------
+    frozen occupied :      0
+    active occupied :      9
+    active virtual  :     44
+    frozen virtual  :      0
+    all together    :     53
+   -----------------------------
+
+
+     time in riccmos       cpu:  0.01 sec    wall:  0.05 sec    ratio:  0.1
+
+     total memory allocated for calculation of (Q|P)**(-1/2) : 1 MiB
+
+
+     calculation of (P|Q) ...
+     time in lp2sym        cpu:  0.00 sec    wall:  0.00 sec    ratio:  1.0
+
+
+     calculation of the Cholesky decomposition of (P|Q)**(-1) ...
+     time in invmetri      cpu:  0.00 sec    wall:  0.02 sec    ratio:  0.1
+ preparing DFT   numerical integration ....
+          Overall gridpoints after grid construction =         27148
+
+ Calculating ground state density on molecular grid
+
+ Integral of ground state density: N =   18.00000497721145    
+
+
+ all orbitals will be included in the transformation
+
+ number of non-frozen orbitals          :    53
+ number of non-frozen occupied orbitals :     9
+
+
+
+ dimension of super-tensorspace: 2
+
+          IRREP   tensor space dimension   number of roots
+
+           a                 396                      5
+                    12
+ Switching off XC: hybrid=  0.100000000000000     
+
+ machine precision: 2.22D-16
+
+
+ logfile sing_a    will be constructed
+
+
+
+
+                       Nonorthonormal Krylov Space Iteration
+
+
+ total number of roots to be determined: 5
+
+
+ maximum core memory set to          500 MB,
+ corresponding to     9174 vectors in CAO basis
+
+
+ maximum number of simultaneously treated vectors (including degeneracy):       10
+
+
+ Iteration IRREP Converged      Max. Euclidean
+                 roots          residual norm
+
+    1       a        0        1.242774450304172D-01
+ 
+    2       a        0        3.726272096759584D-02
+ 
+    3       a        0        8.906407649375427D-03
+ 
+    4       a        0        1.377995369762917D-03
+ 
+    5       a        4        2.287588503300319D-04
+ 
+    6       a        4        3.284430165087294D-05
+ 
+    7       a        5        7.792412164236961D-06
+ 
+
+ converged!
+
+ Eigenpairs written on logfile sing_a   
+
+
+
+ IRREP   Vector     Eigenvalue           Euclidean residual norm
+
+  a         1    2.753707024969111D-01    7.698581805371588D-07
+            2    3.368954331791698D-01    1.150204885578112D-06
+            3    3.428656996014607D-01    5.561573043357125D-06
+            4    3.684502363552726D-01    1.856177037199154D-06
+            5    3.797524590512985D-01    7.792412164236961D-06
+
+
+
+
+
+
+                    Selection rules for point group c1  
+
+
+ Subduction with respect to c1  :
+
+    Polar vector representation: a                           
+
+    Axial vector representation: a                           
+
+    Symmetric second rank tensor representation: a                           
+
+
+
+
+                            Ground state
+
+
+ Total energy:                           -115.6583837467000    
+
+ Charge:
+
+               elec          nuc         total
+
+           -18.000000    18.000000     0.000000
+
+
+ Electric dipole moment:
+
+               elec          nuc         total   
+
+    x      143.943174  -144.235142    -0.291968    Norm:              0.638713
+    y     -110.860583   110.311648    -0.548935
+    z        0.339254    -0.485471    -0.146217    Norm / debye:      1.623459
+
+
+ Electric quadrupole moment:
+
+               elec          nuc         total   
+
+   xx    -1201.034218  1195.764940    -5.269277
+   yy     -700.204801   684.720217   -15.484584    1/3*trace:       -10.259015
+   zz      -16.211651     6.188469   -10.023182
+   xy      888.734636  -887.679428     1.055208
+   xz       -2.126953     2.892501     0.765548    Anisotropy:        9.180754
+   yz        1.740254    -2.256050    -0.515797
+
+
+
+ ==============================================================================
+
+                              I R R E P   a   
+
+ ==============================================================================
+
+
+ Excitation is electric dipole allowed
+
+ Excitation is magnetic dipole allowed
+
+ Excitation is electric quadrupole allowed
+
+
+
+
+                         1 singlet a excitation
+
+
+ Total energy:                           -115.3830130442031    
+
+ Excitation energy:                      0.2753707024969111    
+
+ Excitation energy / eV:                  7.493221279254656    
+
+ Excitation energy / nm:                  165.4618746542621    
+
+ Excitation energy / cm^(-1):             60436.88323610913    
+
+
+ Oscillator strength:
+
+    velocity representation:             0.7074614854193901E-02
+
+    length representation:               0.1312382471806893E-03
+
+    mixed representation:                0.9635662895121303E-03
+
+
+ Rotatory strength:
+
+    velocity representation:             0.3598407110746841E-08
+
+    velocity rep. / 10^(-40)erg*cm^3:    0.2324744307447442E-03
+
+    length representation:              -0.1236228948792032E-08
+
+    length rep. / 10^(-40)erg*cm^3:     -0.7986634427280067E-04
+
+
+ Dominant contributions:
+
+      occ. orbital   energy / eV   virt. orbital     energy / eV   |coeff.|^2*100
+        9 a              -6.76          10 a               1.25       99.8
+ 
+
+ Change of electron number:
+
+             0.000000
+
+
+ Electric transition dipole moment (velocity rep.):
+
+    x        0.000003        Norm:                  0.196308
+    y       -0.050530
+    z        0.189693        Norm / debye:          0.498969
+
+
+ Electric transition dipole moment (length rep.):
+
+    x        0.000006        Norm:                  0.026737
+    y        0.006884
+    z       -0.025836        Norm / debye:          0.067960
+
+
+ Magnetic transition dipole moment / i:
+
+    x        0.000219        Norm:                  0.001120
+    y       -0.001061
+    z       -0.000283        Norm / Bohr mag.:      0.306864
+
+
+ Electric quadrupole transition moment:
+
+   xx       -0.000095
+   yy       -0.085472        1/3*trace:             0.028554
+   zz        0.171230
+   xy       -0.222208
+   xz        0.834280        Anisotropy:            1.531122
+   yz        0.137680
+
+
+
+
+                         2 singlet a excitation
+
+
+ Total energy:                           -115.3214883135208    
+
+ Excitation energy:                      0.3368954331791698    
+
+ Excitation energy / eV:                  9.167395100102151    
+
+ Excitation energy / nm:                  135.2447916257987    
+
+ Excitation energy / cm^(-1):             73940.00078151481    
+
+
+ Oscillator strength:
+
+    velocity representation:             0.5097456606878717E-01
+
+    length representation:               0.2939955952265145E-01
+
+    mixed representation:                0.3871214007462807E-01
+
+
+ Rotatory strength:
+
+    velocity representation:             0.4934370146351117E-09
+
+    velocity rep. / 10^(-40)erg*cm^3:    0.3187840773854948E-04
+
+    length representation:              -0.2088341286793311E-07
+
+    length rep. / 10^(-40)erg*cm^3:     -0.1349169054268737E-02
+
+
+ Dominant contributions:
+
+      occ. orbital   energy / eV   virt. orbital     energy / eV   |coeff.|^2*100
+        9 a              -6.76          11 a               2.87       98.6
+ 
+
+ Change of electron number:
+
+             0.000000
+
+
+ Electric transition dipole moment (velocity rep.):
+
+    x        0.000005        Norm:                  0.476403
+    y        0.122625
+    z       -0.460351        Norm / debye:          1.210906
+
+
+ Electric transition dipole moment (length rep.):
+
+    x        0.000005        Norm:                  0.361800
+    y        0.093129
+    z       -0.349609        Norm / debye:          0.919611
+
+
+ Magnetic transition dipole moment / i:
+
+    x       -0.003252        Norm:                  0.006494
+    y       -0.005432
+    z       -0.001447        Norm / Bohr mag.:      1.779896
+
+
+ Electric quadrupole transition moment:
+
+   xx       -0.000093
+   yy        0.886056        1/3*trace:             0.386735
+   zz        0.274241
+   xy       -1.001435
+   xz        3.759531        Anisotropy:            7.395599
+   yz       -1.699669
+
+
+
+
+                         3 singlet a excitation
+
+
+ Total energy:                           -115.3155180470985    
+
+ Excitation energy:                      0.3428656996014607    
+
+ Excitation energy / eV:                  9.329854384959559    
+
+ Excitation energy / nm:                  132.8897953716624    
+
+ Excitation energy / cm^(-1):             75250.32279972773    
+
+
+ Oscillator strength:
+
+    velocity representation:             0.6809166380647691E-02
+
+    length representation:               0.3126407039623141E-02
+
+    mixed representation:                0.3998964524921998E-02
+
+
+ Rotatory strength:
+
+    velocity representation:             0.1171686038967725E-07
+
+    velocity rep. / 10^(-40)erg*cm^3:    0.7569656143327613E-03
+
+    length representation:              -0.2018524106014540E-04
+
+    length rep. / 10^(-40)erg*cm^3:      -1.304063792806593    
+
+
+ Dominant contributions:
+
+      occ. orbital   energy / eV   virt. orbital     energy / eV   |coeff.|^2*100
+        8 a              -8.50          10 a               1.25       98.9
+ 
+
+ Change of electron number:
+
+            -0.000000
+
+
+ Electric transition dipole moment (velocity rep.):
+
+    x        0.016993        Norm:                  0.172596
+    y        0.165970
+    z        0.044212        Norm / debye:          0.438698
+
+
+ Electric transition dipole moment (length rep.):
+
+    x       -0.048072        Norm:                  0.116952
+    y        0.103022
+    z        0.027446        Norm / debye:          0.297264
+
+
+ Magnetic transition dipole moment / i:
+
+    x        0.000345        Norm:                  0.002138
+    y       -0.000576
+    z        0.002030        Norm / Bohr mag.:      0.585983
+
+
+ Electric quadrupole transition moment:
+
+   xx        0.680232
+   yy        0.724285        1/3*trace:             0.626586
+   zz        0.475240
+   xy       -0.141851
+   xz        0.041949        Anisotropy:            0.407425
+   yz       -0.125643
+
+
+
+
+                         4 singlet a excitation
+
+
+ Total energy:                           -115.2899335103447    
+
+ Excitation energy:                      0.3684502363552726    
+
+ Excitation energy / eV:                  10.02604535039346    
+
+ Excitation energy / nm:                  123.6621615736086    
+
+ Excitation energy / cm^(-1):             80865.47955540118    
+
+
+ Oscillator strength:
+
+    velocity representation:             0.8038946304316091E-02
+
+    length representation:               0.8694388691395360E-02
+
+    mixed representation:                0.8360246637371132E-02
+
+
+ Rotatory strength:
+
+    velocity representation:             0.5233813280560871E-07
+
+    velocity rep. / 10^(-40)erg*cm^3:    0.3381295460952281E-02
+
+    length representation:               0.5352082197850992E-07
+
+    length rep. / 10^(-40)erg*cm^3:      0.3457702877833223E-02
+
+
+ Dominant contributions:
+
+      occ. orbital   energy / eV   virt. orbital     energy / eV   |coeff.|^2*100
+        9 a              -6.76          12 a               3.88       98.8
+ 
+
+ Change of electron number:
+
+            -0.000000
+
+
+ Electric transition dipole moment (velocity rep.):
+
+    x        0.000021        Norm:                  0.180907
+    y        0.046575
+    z       -0.174809        Norm / debye:          0.459824
+
+
+ Electric transition dipole moment (length rep.):
+
+    x        0.000022        Norm:                  0.188138
+    y        0.048437
+    z       -0.181796        Norm / debye:          0.478202
+
+
+ Magnetic transition dipole moment / i:
+
+    x       -0.000842        Norm:                  0.001270
+    y       -0.000918
+    z       -0.000245        Norm / Bohr mag.:      0.348035
+
+
+ Electric quadrupole transition moment:
+
+   xx       -0.000387
+   yy        0.633887        1/3*trace:             0.201004
+   zz       -0.030488
+   xy       -0.546384
+   xz        2.051089        Anisotropy:            4.260932
+   yz       -1.185571
+
+
+
+
+                         5 singlet a excitation
+
+
+ Total energy:                           -115.2786312876487    
+
+ Excitation energy:                      0.3797524590512985    
+
+ Excitation energy / eV:                  10.33359460977659    
+
+ Excitation energy / nm:                  119.9817185485167    
+
+ Excitation energy / cm^(-1):             83346.03070770061    
+
+
+ Oscillator strength:
+
+    velocity representation:             0.1111015063183063E-01
+
+    length representation:               0.1326117351556313E-01
+
+    mixed representation:                0.1213810673651338E-01
+
+
+ Rotatory strength:
+
+    velocity representation:             0.7948383190742764E-07
+
+    velocity rep. / 10^(-40)erg*cm^3:    0.5135038367644598E-02
+
+    length representation:               0.5063197148273230E-07
+
+    length rep. / 10^(-40)erg*cm^3:      0.3271069221928405E-02
+
+
+ Dominant contributions:
+
+      occ. orbital   energy / eV   virt. orbital     energy / eV   |coeff.|^2*100
+        9 a              -6.76          13 a               4.12       98.5
+ 
+
+ Change of electron number:
+
+             0.000000
+
+
+ Electric transition dipole moment (velocity rep.):
+
+    x        0.000027        Norm:                  0.209486
+    y        0.053923
+    z       -0.202427        Norm / debye:          0.532465
+
+
+ Electric transition dipole moment (length rep.):
+
+    x        0.000032        Norm:                  0.228869
+    y        0.058919
+    z       -0.221155        Norm / debye:          0.581730
+
+
+ Magnetic transition dipole moment / i:
+
+    x        0.000236        Norm:                  0.005048
+    y       -0.004872
+    z       -0.001298        Norm / Bohr mag.:      1.383434
+
+
+ Electric quadrupole transition moment:
+
+   xx       -0.000553
+   yy        0.539257        1/3*trace:             0.244476
+   zz        0.194725
+   xy       -0.670099
+   xz        2.515851        Anisotropy:            4.877698
+   yz       -1.037979
+
+ SUMMARY OF EXCITATION ENERGIES AND DIPOLE OSCILLATOR STRENGTHS (velocity/length):
+
+ -----------------------------------------------------------------------------------------------
+ |    Exc.   | energy (Eh) | energy (eV) | energy (cm-1) | energy (nm) | Osc.(vel) | Osc.(len) |
+ -----------------------------------------------------------------------------------------------
+ |     1 a   |    0.275371 |     7.49322 |     60436.883 |     165.462 |   0.00707 |   0.00013 |
+ |     2 a   |    0.336895 |     9.16739 |     73940.001 |     135.245 |   0.05097 |   0.02940 |
+ |     3 a   |    0.342866 |     9.32985 |     75250.323 |     132.890 |   0.00681 |   0.00313 |
+ |     4 a   |    0.368450 |    10.02604 |     80865.480 |     123.662 |   0.00804 |   0.00869 |
+ |     5 a   |    0.379752 |    10.33359 |     83346.031 |     119.982 |   0.01111 |   0.01326 |
+ -----------------------------------------------------------------------------------------------
+
+
+
+    escf profiling
+  --------------------------------------------------------------------
+             module   cpu total (s)       %  wall total (s)       %
+
+         input total             0.0    9.27             0.1    6.57
+       init symmetry             0.0    0.84             0.0    0.93
+               moinp             0.0    1.04             0.0    0.21
+            RI total             0.0    3.27             0.0    0.65
+          RI prelims             0.0    1.69             0.0    0.33
+       escf_cc_setup             0.0   14.04             0.4   26.54
+           grid init             0.0    6.42             0.0    1.31
+            becke...             0.0    3.41             0.0    0.69
+         dft prelims             0.1   35.08             0.1    7.00
+           dft total             0.1   35.09             0.1    7.00
+             funct_2             0.0   11.26             0.0    2.25
+              onde_3             0.0   14.89             0.0    2.99
+                mgga             0.0    7.70             0.0    1.54
+              tracao             0.0    0.17             0.0    0.16
+           diag_prep             0.0    0.01             0.0    0.00
+              respon             0.1   26.94             0.6   43.13
+            startvec             0.0    0.05             0.0    0.04
+           mvproduct             0.0   13.77             0.1    9.63
+            tramocao             0.0    0.70             0.0    0.14
+     tramocao_mvprod             0.0    0.57             0.0    0.11
+              colrsp             0.0    1.55             0.0    0.31
+              gammaP             0.0    0.75             0.0    0.15
+              cotlet             0.0    0.10             0.0    0.02
+              gammaQ             0.0    0.54             0.0    0.11
+            tracaomo             0.0    0.78             0.0    0.96
+              mv_rik             0.0   10.61             0.1    8.20
+                ritz             0.0    2.98             0.0    0.60
+            expandl3             0.0    0.39             0.0    0.71
+           startover             0.0    0.63             0.0    0.12
+                rest             0.0    0.52             0.0    2.73
+             writeep             0.0    2.54             0.0    2.15
+              proper             0.0    2.16             0.0    1.30
+ 
+
+
+    ------------------------------------------------------------------------
+         total  cpu-time :   0.27 seconds
+         total wall-time :   1.54 seconds
+    ------------------------------------------------------------------------
+
+   ****  escf : all done  ****
+
+
+    2023-03-08 01:08:28.780 
+

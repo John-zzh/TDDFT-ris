@@ -16,13 +16,13 @@
 
 usage() {
     echo "Usage:"
-    echo "sh escfrisprep.sh [-b s/s+p/N] [-x Fe] [-x Ag] [-t VALUE]  [-c Y/N] [-m as/ris] [-g Y/N] [-r] "
+    echo "sh escfrisprep.sh [-b s/s+p/N] [-x Fe] [-x Ag] [-t VALUE]  [-c Y/N] [-m auto/as/ris] [-g Y/N] [-r] "
     echo "Description:"
     echo "-b: s -- one s type orbital per atom; p -- additional p orbital per non Hydrogen atom; N -- do not creat the minimal auxbasis. Default: s"
     echo "-x: The element that you dont want to use the full RIJK fitting basis. Use -x multiple times if you want to exclude more than one element: -x ag -x au.  Default: none"
     echo "-t: The global theta value in the orbital exponent alpha=theta/R^2. Default: 0.2."
     echo "-c: Y -- modify the control file; N -- do not revise the control file.  Default: Y"
-    echo "-m: as -- use pure density functional (TDDFT-as); ris -- use hybrid or RSH functional (TDDFT-ris). Default: ris. This option only matters using pure density functional and excluding some elements that will use default RIJ fitting basis"
+    echo "-m: as -- use pure density functional (TDDFT-as); ris -- use hybrid or RSH functional (TDDFT-ris);auto -- autmatically detect the type of functional. Default: auto. This option only matters using pure density functional and excluding some elements that will use default RIJ fitting basis"
     echo "-g: Y -- revise the gridsize. This option is for the dvelopmental version of Turomole that has not fully kill the grid in TDDFT-ris codes. Default: N"
     echo "-r: Recover the original setting from backup (mainly control file and auxbasis file)"
     exit -1
@@ -62,7 +62,7 @@ fi
 s_sp='s'
 revise='Y'
 theta=0.2
-method='ris'
+method='auto'
 revise_g='N'
 
 while getopts "hrb:x:t:c:m:g:" optname
@@ -121,13 +121,59 @@ do
 done
 
 
-if [[ "$method" == 'as' ]];then
-    echo "dealing with pure functional"
-    CBAS='jbas'
-else
-    echo "dealing with hybrid functional"
-    CBAS='cbas'
+if [[ "$method" == 'auto' ]]; then                   
+    FUNC_TYPE=$($SHOWDG xctype | awk '{print $2}')
+    ISDFT=$($SHOWDG dft) 
+    if [[ ! -z "$ISDFT" ]]; then 
+    if [[ -z "$FUNC_TYPE" ]]; then
+      echo "!!! WARNING !!! \$xctype not found in control"
+      echo "assuming TDDFT-ris"   
+      method='ris'
+    else
+     echo "method is auto; xctype= " $FUNC_TYPE
+     if [[ "$FUNC_TYPE" == 'LDA' || "$FUNC_TYPE" == 'GGA' || "$FUNC_TYPE" == 'MGGA' ]]; then
+        method='as'
+     elif [[ "$FUNC_TYPE" == 'localhyb' ]]; then
+        echo "Local Hybrids not supported"
+        exit -1
+     else
+        method='ris'  
+     fi
+    fi
+    else
+      echo "Ground-state is Hartee-Fock"
+      echo "assuming TDDFT-ris"
+      method='ris'            
+    fi
 fi
+
+if [[ "$method" == 'as' ]]; then
+    echo "method is TDDFT-as : minimal auxbasis for Coulomb"
+    XBAS='jbas'
+elif  [[ "$method" == 'ris' ]]; then 
+    echo "method is TDDFT-ris : minimal auxbasis for Coulomb and Exchange"
+    XBAS='cbas'
+else
+   echo "Method " $method "is incorrect"
+   exit -1 
+fi
+
+echo "minimal auxbasis in " "\$"$XBAS
+
+sizebas=`$SHOWDG $CBAS | wc -l` 
+#echo $sizebas
+if [[  "$sizebas" -lt "2" ]]; then  
+ echo "no \$"$CBAS  "found" 
+ if [[ "$CBAS" == "cbas" ]]; then
+  echo "Set up an ordinary calculation TDDFT calculation RIJK (hybrid XC)"      
+ elif [[ "$CBAS" == "jbas" ]]; then        
+  echo "Set up an ordinary calculation TDDFT calculation RIJ (semilocal XC)"                
+ fi
+ exit -1  
+fi
+
+echo "theta is " $theta   
+
     
     
 add_sub_data(){

@@ -1,0 +1,110 @@
+Copying working directory from "/home/zzz6/turbomole_tool/TDDFT-ris/test/pbe0_mix_off" to "/scratch/pbsjobs/job.18681662.hpc"
+sending incremental file list
+./
+coord
+define.inp
+escf.slurm
+
+sent 5,221 bytes  received 76 bytes  10,594.00 bytes/sec
+total size is 4,965  speedup is 0.94
+Changing directory to "/scratch/pbsjobs/job.18681662.hpc"
+ define ended normally 
+ dscf ended normally
+ escf ended normally
+
+             +--------------------------------------+
+             |            escfrisprep               |
+             |  prepare for TDDFT-ris calculations  |
+             |           with TURBOMOLE             |
+             +--------------------------------------+
+
+   Ref: 1. Z. Zhou, F. Della Sala, S. M. Parker,
+           J. Phys. Chem. Lett. 2023, 14, 7, 1968–1976
+        2. G. Giannone, F. Della Sala.,
+           J. Chem. Phys. 2020, 153, 084110
+
+            Wed Mar  8 01:08:20 EST 2023
+
+rpa detected
+dealing with hybrid functional
+modify the setting, turn on RIJK and turn off xckernel
+control file is control
+create control_ris_backup
+control file revision done
+generate ris auxbasis file
+included element: h
+included element: o
+included element: c
+ escf ended normally
+
+             +--------------------------------------+
+             |            escfrisprep               |
+             |  prepare for TDDFT-ris calculations  |
+             |           with TURBOMOLE             |
+             +--------------------------------------+
+
+   Ref: 1. Z. Zhou, F. Della Sala, S. M. Parker,
+           J. Phys. Chem. Lett. 2023, 14, 7, 1968–1976
+        2. G. Giannone, F. Della Sala.,
+           J. Chem. Phys. 2020, 153, 084110
+
+            Wed Mar  8 01:08:22 EST 2023
+
+rpa detected
+elements [ o ] will use the default full fitting basis
+dealing with hybrid functional
+modify the setting, turn on RIJK and turn off xckernel
+control file is control
+control file revision done
+generate ris auxbasis file
+create auxbasis_ris_backup 
+included element: h
+excluded element: o will use full fitting basis
+included element: c
+ escf ended normally
+
+             +--------------------------------------+
+             |            escfrisprep               |
+             |  prepare for TDDFT-ris calculations  |
+             |           with TURBOMOLE             |
+             +--------------------------------------+
+
+   Ref: 1. Z. Zhou, F. Della Sala, S. M. Parker,
+           J. Phys. Chem. Lett. 2023, 14, 7, 1968–1976
+        2. G. Giannone, F. Della Sala.,
+           J. Chem. Phys. 2020, 153, 084110
+
+            Wed Mar  8 01:08:25 EST 2023
+
+rpa detected
+restore auxbasis from auxbasis_ris_backup
+restore control from control_ris_backup
+Data group $ri not found in file control
+The original calculation did not use RI, remove auxbasis
+recover the original setting from backup
+ escf ended normally
+
+Copying results from "/scratch/pbsjobs/job.18681662.hpc" to "/home/zzz6/turbomole_tool/TDDFT-ris/test/pbe0_mix_off"
+sending incremental file list
+./
+basis
+control
+coord
+define.out
+dscf.out
+energy
+escf-escf2.out
+escf-ris-x.out
+escf-ris.out
+escf1.out
+exspectrum-final
+exspectrum-initial
+exspectrum-ris
+exspectrum-ris-x
+moments
+mos
+statistics
+
+sent 234,571 bytes  received 506 bytes  156,718.00 bytes/sec
+total size is 234,926  speedup is 1.00
+Copied successfully, removing temporary files
